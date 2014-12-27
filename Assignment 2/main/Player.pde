@@ -1,0 +1,161 @@
+class Player extends GameObject
+{
+  float w, h;
+
+  float timeDelta = 1.0f / 60.0f;
+
+  float fireRate = 10.0f;
+  float ellapsed = 0.0f;
+  float toPass = 15.0f / fireRate;
+
+  int playerIndex = 0;
+
+  Player(float x, float y, float w, float h, int playerIndex)
+  {
+    this.playerIndex = playerIndex;
+    position.x = x;
+    position.y = y;
+    this.w = w;
+    this.h = h;
+    colour = color(255);
+    theta = 0;
+  }
+
+  Player(float x, float y, int playerIndex)
+  {
+    this.playerIndex = playerIndex;
+    position.x = x;
+    position.y = y;
+    h = 20;
+    w = 20;
+    colour = color(255);
+    theta = 0;
+  }
+
+  Player()
+  {
+    position.x = width / 2;
+    position.y = width / 2;
+    w = 20;
+    h = 20;
+    colour = color(255);
+    theta = 0;
+  }
+
+
+  void display()
+  {
+    pushMatrix();
+    translate(position.x, position.y);   
+    rotate(theta);
+
+    stroke(colour);
+    float halfWidth = w / 2;
+    float  halfHeight = h / 2;
+
+    fill(0, 255, 200);
+    stroke(0, 255, 200);
+
+    line(-halfWidth, halfHeight, 0, - halfHeight);
+    line(0, - halfHeight, halfWidth, halfWidth);
+    line(halfWidth - 3, halfHeight - 5, -7, +5);
+    //line(halfWidth, halfHeight, 0, 0);
+    //  line(0,0,  - halfWidth, halfHeight);
+
+    if (keyPressed)
+    {
+      switch (key)
+      {
+      case 'w':
+
+        line(5, 10, 5, 15);
+        line(-5, 10, -5, 15);
+        line(0, 10, 0, 20);
+
+        break;
+      }
+    }
+
+    popMatrix();
+  }
+
+  void move()
+  {    
+    ellapsed += timeDelta;
+    float lx, ly;
+    lx = sin(theta);
+    ly = -cos(theta);
+    if (keyPressed)
+    {
+      switch (evalKey())
+      {
+      case 0:
+        position.x = position.x + lx;
+        position.y = position.y + ly;
+
+        break;
+      case 1:
+        position.y = position.y + 1;
+        break;
+      case 2:
+        theta -= 0.1f;
+        break;
+      case 3:
+        theta += 0.1f;
+        break;  
+      case 4:
+        if (ellapsed > toPass)
+        {
+          Bullet bullet = new Bullet();
+          bullet.position = position.get();
+          bullet.theta = theta;
+          objects.add(bullet);
+          ellapsed = 0.0f;
+        }
+        break;
+      }
+    }
+  }
+
+  public int evalKey() {
+    int contIndex = -1;
+    if (key == ' ')
+      contIndex = 4;
+
+print(keyCode + "\n");
+
+    if (playerIndex == 0) {
+      switch(key) {
+      case 'w':
+        contIndex = 0;
+        break;
+      case 's':
+        contIndex = 1;
+        break;
+      case 'a':
+        contIndex = 2;
+        break;
+      case 'd':
+        contIndex = 3;
+        break;
+      }
+    } else if (playerIndex == 1) {
+      switch(keyCode) {
+      case 38:
+        contIndex = 0;
+        break;
+      case 40:
+        contIndex = 1;
+        break;
+      case 37:
+        contIndex = 2;
+        break;
+      case 39:
+        contIndex = 3;
+        break;
+      }
+    }
+    return contIndex;
+  }
+}
+
