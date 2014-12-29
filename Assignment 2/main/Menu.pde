@@ -22,43 +22,96 @@ class Menu extends GameObject
   fill(255);
   stroke(255);
   
+  // Spell SUPER
+  
   // character S
-  line(width / 2 - 20, 50, width / 2, 50);
-  line(width / 2 - 20, 50, width / 2 - 20, 65);
-  line(width / 2 - 20, 65, width / 2, 65);
-  line(width / 2 , 65, width / 2, 80);
-  line(width / 2 - 20, 80, width / 2, 80);
+  line(width / 2 - 165, 50, width / 2 - 145, 50);
+  line(width / 2 - 165, 50, width / 2 - 165, 65);
+  line(width / 2 - 165, 65, width / 2 - 145, 65);
+  line(width / 2 - 145 , 65, width / 2 - 145, 80);
+  line(width / 2 - 165, 80, width / 2 - 145, 80);
   
   // character U
-  line(width / 2 + 10, 50, width / 2 + 10, 80);
-  line(width / 2 + 30, 50, width / 2 + 30, 80);
-  line(width / 2 + 10, 80, width / 2 + 30, 80);
+  line(width / 2 - 135, 50, width / 2 - 135, 80);
+  line(width / 2 - 115, 50, width / 2 - 115, 80);
+  line(width / 2 - 135, 80, width / 2 - 115, 80);
   
   // charater P
-  line(width / 2 + 40, 50, width / 2 + 40, 80);
-  line(width / 2 + 40, 50, width / 2 + 60, 50);
-  line(width / 2 + 40, 65, width / 2 + 60, 65);
-  line(width / 2 + 60, 65, width / 2 + 60, 50);
+  line(width / 2 - 105, 50, width / 2 - 105, 80);
+  line(width / 2 - 105, 50, width / 2 - 85, 50);
+  line(width / 2 - 105, 65, width / 2 - 85, 65);
+  line(width / 2 - 85, 65, width / 2 - 85, 50);
   
   // character E
   
-  line(width / 2 + 70, 50, width / 2 + 90, 50);
-  line(width / 2 + 70, 50, width / 2 + 70, 80);
-  line(width / 2 + 70, 65, width / 2 + 90, 65);
-  line(width / 2 + 70, 80, width / 2 + 90, 80);
+  line(width / 2 - 75, 50, width / 2 - 55, 50);
+  line(width / 2 - 75, 50, width / 2 - 75, 80);
+  line(width / 2 - 75, 65, width / 2 - 55, 65);
+  line(width / 2 - 75, 80, width / 2 - 55, 80);
   
   // character R
   
-  line(width / 2 + 100, 50, width / 2 + 100, 80);
-  line(width / 2 + 100, 50, width / 2 + 120, 50);
-  line(width / 2 + 120, 50, width / 2 + 120, 65);
-  line(width / 2 + 100, 65, width / 2 + 120, 65);
-  line(width / 2 + 105, 65, width / 2 + 120, 80);
+  line(width / 2 - 45, 50, width / 2 - 45, 80);
+  line(width / 2 - 45, 50, width / 2 - 25, 50);
+  line(width / 2 - 25, 50, width / 2 - 25, 65);
+  line(width / 2 - 45, 65, width / 2 - 25, 65);
+  line(width / 2 - 40, 65, width / 2 - 25, 80);
+  
+  
+  // space placeholder
+  
+//  line(width / 2 - 25, 50, width / 2 + 5, 50);
+  
+  // Spell Asteroid
+  
+  // character A
+  
+  line(width / 2 + 5, 80, width / 2 + 5, 60);
+  line(width / 2 + 25, 80, width / 2 + 25, 60);
+  line(width / 2 + 5, 60, width / 2 + 15, 50);
+  line(width / 2 + 25, 60, width / 2 + 15, 50);
+  line(width / 2 + 5, 65, width / 2 + 25, 65);
     
+  // character S
+    
+  line(width / 2 + 35, 50, width / 2 + 55 , 50);
+  line(width / 2 + 35, 50, width / 2 + 35, 65);
+  line(width / 2 + 35, 65, width / 2 + 55 , 65);
+  line(width / 2 + 55 , 65, width / 2 + 55 , 80);
+  line(width / 2 + 35, 80, width / 2 + 55 , 80);
+  
+  // character T
+  
+  line(width / 2 + 65, 50, width / 2 + 85, 50);
+  line(width / 2 + 75, 50, width / 2 + 75, 80);
+  
+  // character R
+  
+  line(width / 2 + 95, 50, width / 2 + 95, 80);
+  line(width / 2 + 95, 50, width / 2 + 115, 50);
+  line(width / 2 + 115, 50, width / 2 + 115, 65);
+  line(width / 2 + 95, 65, width / 2 + 115, 65);
+  line(width / 2 + 100, 65, width / 2 + 115, 80);
+  
+  // character O
+  
+  line(width / 2 + 125, 50, width / 2 + 145, 50);
+  line(width / 2 + 125, 50, width / 2 + 125, 80);
+  line(width / 2 + 125, 80, width / 2 + 145, 80);
+  line(width /2 + 145, 80, width / 2  + 145, 50);
+  
+  // character I
+  
+  line(width / 2 + 155, 50, width / 2 + 175, 50);
+  line(width / 2 + 155, 80, width / 2 + 175, 80);
+  line(width / 2 + 165, 50, width / 2 + 165, 80);
+  
+  // character D
   
   
-  text("Super Asteroids", width / 2 , height / 2 - 150 );
-  text("1 coin 1 game", width / 2, height / 2 + 200);
+  
+//  text("Super Asteroids", width / 2 , height / 2 - 150 );
+//  text("1 coin 1 game", width / 2, height / 2 + 200);
   
   float x = 50;
   float y = 50;
@@ -78,12 +131,12 @@ class Menu extends GameObject
     
         case 'f':
          isMainMenu = false; 
-         print("worked!");
+     
         break;  
        
         case 'b':
          isMainMenu = true; 
-         print("worked!");
+         
         break;  
       }
     }
