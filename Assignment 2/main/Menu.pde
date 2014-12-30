@@ -108,6 +108,14 @@ class Menu extends GameObject
   
   // character D
   
+  line(width / 2 + 185, 50, width / 2 + 195, 50);
+  line(width / 2 + 185, 80, width / 2 + 195, 80);
+  line(width / 2 + 185, 50, width / 2 + 185, 80);
+  line(width / 2 + 195, 50, width / 2 + 205, 60);
+  line(width / 2 + 195, 80, width / 2 + 205, 70);
+  line(width / 2 + 205, 60, width / 2 + 205, 70);
+  
+  
   
   
 //  text("Super Asteroids", width / 2 , height / 2 - 150 );
