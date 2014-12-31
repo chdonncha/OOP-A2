@@ -4,6 +4,7 @@ class Menu extends GameObject
   PFont menufont;
   float halfWidth = width / 2;
   float halfHeight = height / 2;
+
   
   void display()
   {
@@ -25,37 +26,37 @@ class Menu extends GameObject
   // Spell SUPER
   
   // character S
-  line(width / 2 - 165, 50, width / 2 - 145, 50);
-  line(width / 2 - 165, 50, width / 2 - 165, 65);
-  line(width / 2 - 165, 65, width / 2 - 145, 65);
-  line(width / 2 - 145 , 65, width / 2 - 145, 80);
-  line(width / 2 - 165, 80, width / 2 - 145, 80);
+  line(width / 2 - 195, 50, width / 2 - 175, 50);
+  line(width / 2 - 195, 50, width / 2 - 195, 65);
+  line(width / 2 - 195, 65, width / 2 - 175, 65);
+  line(width / 2 - 175 , 65, width / 2 - 175, 80);
+  line(width / 2 - 195, 80, width / 2 - 175, 80);
   
   // character U
-  line(width / 2 - 135, 50, width / 2 - 135, 80);
-  line(width / 2 - 115, 50, width / 2 - 115, 80);
-  line(width / 2 - 135, 80, width / 2 - 115, 80);
+  line(width / 2 - 165, 50, width / 2 - 165, 80);
+  line(width / 2 - 145, 50, width / 2 - 145, 80);
+  line(width / 2 - 165, 80, width / 2 - 145, 80);
   
   // charater P
-  line(width / 2 - 105, 50, width / 2 - 105, 80);
-  line(width / 2 - 105, 50, width / 2 - 85, 50);
-  line(width / 2 - 105, 65, width / 2 - 85, 65);
-  line(width / 2 - 85, 65, width / 2 - 85, 50);
+  line(width / 2 - 135, 50, width / 2 - 135, 80);
+  line(width / 2 - 135, 50, width / 2 -115, 50);
+  line(width / 2 - 135, 65, width / 2 -115, 65);
+  line(width / 2 - 115, 65, width / 2 -115, 50);
   
   // character E
   
-  line(width / 2 - 75, 50, width / 2 - 55, 50);
-  line(width / 2 - 75, 50, width / 2 - 75, 80);
-  line(width / 2 - 75, 65, width / 2 - 55, 65);
-  line(width / 2 - 75, 80, width / 2 - 55, 80);
+  line(width / 2 - 105, 50, width / 2 - 85, 50);
+  line(width / 2 - 105, 50, width / 2 - 105, 80);
+  line(width / 2 - 105, 65, width / 2 - 85, 65);
+  line(width / 2 - 105, 80, width / 2 - 85, 80);
   
   // character R
-  
-  line(width / 2 - 45, 50, width / 2 - 45, 80);
-  line(width / 2 - 45, 50, width / 2 - 25, 50);
-  line(width / 2 - 25, 50, width / 2 - 25, 65);
-  line(width / 2 - 45, 65, width / 2 - 25, 65);
-  line(width / 2 - 40, 65, width / 2 - 25, 80);
+ 
+  line(width / 2 - 75, 50, width / 2 - 75, 80);
+  line(width / 2 - 75, 50, width / 2 - 55, 50);
+  line(width / 2 - 55, 50, width / 2 - 55, 65);
+  line(width / 2 - 75, 65, width / 2 - 55, 65);
+  line(width / 2 - 70, 65, width / 2 - 55, 80);
   
   
   // space placeholder
@@ -124,6 +125,7 @@ class Menu extends GameObject
   
  // spell ATTACK
    
+   
   // character A
   
   line(width / 2 - 90, 130, width / 2 - 90, 110);
@@ -163,9 +165,110 @@ class Menu extends GameObject
   line(width / 2 + 60, 115, width / 2 + 80, 130);
   
   
-
+  // spell 1 Player
   
+  if (selected <= 0){
+    stroke(255,255,0);
+  }
+  
+  line(width / 2 -120, 250, width / 2 -120, 280);
+
+  // character P
+  
+  line(width / 2 - 70, 250, width / 2 - 70, 280);
+  line(width / 2 - 70, 250, width / 2 - 50, 250);
+  line(width / 2 - 70, 265, width / 2 - 50, 265);
+  line(width / 2 - 50, 265, width / 2 - 50, 250);
+  
+  // character L
+
+  line(width / 2 - 40, 250, width / 2 - 40, 280);
+  line(width / 2 - 40, 280, width / 2 - 20, 280);
+  
+  // character A
+  
+  line(width / 2 - 10, 280, width / 2 - 10, 260);
+  line(width / 2 + 10, 280, width / 2 + 10, 260);
+  line(width / 2 - 10, 260, width / 2, 250);
+  line(width / 2 + 10, 260, width / 2, 250);
+  line(width / 2 - 10, 265, width / 2 + 10, 265);
+  
+  // character Y
  
+  line(width / 2 + 20, 250, width / 2 + 30, 260);
+  line(width / 2 + 40, 250, width / 2 + 30, 260);
+  line(width / 2 + 30, 280, width / 2 + 30, 260);
+  
+  // character E
+  
+  line(width / 2 + 50, 250, width / 2 + 70, 250);
+  line(width / 2 + 50, 250, width / 2 + 50, 280);
+  line(width / 2 + 50, 265, width / 2 + 70, 265);
+  line(width / 2 + 50, 280, width / 2 + 70, 280);
+  
+   // character R
+  
+  line(width / 2 + 80, 250, width / 2 + 80, 280);
+  line(width / 2 + 80, 250, width / 2 + 100, 250);
+  line(width / 2 + 100, 250, width / 2 + 100, 265);
+  line(width / 2 + 80, 265, width / 2 + 100, 265);
+  line(width / 2 + 85, 265, width / 2 + 100, 280);
+  
+  
+   // spell 2 Player
+    stroke(255,255,255);
+  if (selected >= 1){
+    stroke(255,255,0);
+  }
+  
+  line(width / 2 -110, 350, width / 2 -110, 365);
+  line(width / 2 -130, 365, width / 2 -130, 380);
+  line(width / 2 -110, 350, width / 2 -130, 350);
+  line(width / 2 -110, 365, width / 2 -130, 365);
+  line(width / 2 -130, 380, width / 2 -110, 380);
+  
+  // character P
+  
+  line(width / 2 - 70, 350, width / 2 - 70, 380);
+  line(width / 2 - 70, 350, width / 2 - 50, 350);
+  line(width / 2 - 70, 365, width / 2 - 50, 365);
+  line(width / 2 - 50, 365, width / 2 - 50, 350);
+  
+  // character L
+
+  line(width / 2 - 40, 350, width / 2 - 40, 380);
+  line(width / 2 - 40, 380, width / 2 - 20, 380);
+  
+  // character A
+  
+  line(width / 2 - 10, 380, width / 2 - 10, 360);
+  line(width / 2 + 10, 380, width / 2 + 10, 360);
+  line(width / 2 - 10, 360, width / 2, 350);
+  line(width / 2 + 10, 360, width / 2, 350);
+  line(width / 2 - 10, 365, width / 2 + 10, 365);
+  
+  // character Y
+ 
+  line(width / 2 + 20, 350, width / 2 + 30, 360);
+  line(width / 2 + 40, 350, width / 2 + 30, 360);
+  line(width / 2 + 30, 380, width / 2 + 30, 360);
+  
+  // character E
+  
+  line(width / 2 + 50, 350, width / 2 + 70, 350);
+  line(width / 2 + 50, 350, width / 2 + 50, 380);
+  line(width / 2 + 50, 365, width / 2 + 70, 365);
+  line(width / 2 + 50, 380, width / 2 + 70, 380);
+  
+   // character R
+  
+  line(width / 2 + 80, 350, width / 2 + 80, 380);
+  line(width / 2 + 80, 350, width / 2 + 100, 350);
+  line(width / 2 + 100, 350, width / 2 + 100, 365);
+  line(width / 2 + 80, 365, width / 2 + 100, 365);
+  line(width / 2 + 85, 365, width / 2 + 100, 380);
+  
+
 //  text("Super Asteroids", width / 2 , height / 2 - 150 );
 //  text("1 coin 1 game", width / 2, height / 2 + 200);
   
@@ -184,13 +287,23 @@ class Menu extends GameObject
     {
       switch (key)
       {
-    
-        case 'f':
+        
+        case 'w':
+        selected --; 
+        
+        break;  
+        
+        case 's':
+        selected ++; 
+        
+        break;  
+        
+        case ENTER:
          isMainMenu = false; 
      
         break;  
        
-        case 'b':
+        case BACKSPACE:
          isMainMenu = true; 
          
         break;  

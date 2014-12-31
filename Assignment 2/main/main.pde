@@ -6,7 +6,8 @@ Menu menu;
 //Stars[] Stars = new Stars[50];
 
 boolean isMainMenu = true;
-
+  int selected = 0;
+  
 void setup()
 {
   size(700, 600);
