@@ -7,7 +7,10 @@ class Player extends GameObject
   float fireRate = 10.0f;
   float ellapsed = 0.0f;
   float toPass = 15.0f / fireRate;
-
+  
+  PVector accel = new PVector();//ship's acceleration
+  PVector velocity = new PVector();//ship's speeds
+  
   int playerIndex = 0;
 
   Player(float x, float y, float w, float h, int playerIndex)
@@ -40,12 +43,18 @@ class Player extends GameObject
     h = 20;
     colour = color(255);
     theta = 0;
+    
   }
 
 
   void display()
   {
+   
+    velocity.add(accel);
+    position.add(velocity);
+    
     pushMatrix();
+ 
     translate(position.x, position.y);   
     rotate(theta);
 
@@ -81,6 +90,27 @@ class Player extends GameObject
 
   void move()
   {    
+    
+    accel.set(0, 0, 0); // cuase drag to slow ship down
+    
+    // off screen loop
+   if (position.x < 0)
+    {
+      position.x = width;
+    }
+    if (position.x > width)
+    {
+      position.x = 0;
+    }
+    if (position.y > height)
+    {
+      position.y = 0;
+    }
+    if (position.y < 0)
+    {
+      position.y = height;
+    }
+    
     ellapsed += timeDelta;
     float lx, ly;
     lx = sin(theta);
@@ -90,12 +120,16 @@ class Player extends GameObject
       switch (evalKey())
       {
       case 0:
-        position.x = position.x + lx;
-        position.y = position.y + ly;
+       // position.x = position.x + lx;
+       // position.y = position.y + ly;
+        
+       float totalAccel = 0.2;                 // how much ship accelerates
+       accel.x = totalAccel * sin(theta);  // total accel
+       accel.y = -totalAccel * cos(theta); // total accel
 
         break;
       case 1:
-        position.y = position.y + 1;
+       // position.y = position.y + 1;
         break;
       case 2:
         theta -= 0.1f;

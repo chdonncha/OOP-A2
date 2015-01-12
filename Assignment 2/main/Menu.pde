@@ -282,7 +282,17 @@ class Menu extends GameObject
   
   void move()
   {    
-
+  
+    print(selected);
+    
+    if(selected >= 2){
+      selected = selected -1;
+    } 
+    
+     if(selected < 0){
+      selected = selected +1;
+    } 
+    
     if (keyPressed)
     {
       switch (key)

@@ -1,9 +1,11 @@
 class GameObject
 {
   PVector position = new PVector(width / 2, height / 2);
+  //PVector accel;
   float theta;
   color colour;
   boolean alive;
+
   
   GameObject()
   {
