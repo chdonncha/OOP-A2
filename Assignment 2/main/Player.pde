@@ -77,9 +77,9 @@ class Player extends GameObject
       {
       case 'w':
 
-        line(5, 10, 5, 15);
-        line(-5, 10, -5, 15);
-        line(0, 10, 0, 20);
+      //    line(5, 10, 5, 15);
+     //  line(-5, 10, -5, 15);
+     //  line(0, 10, 0, 20);
 
         break;
       }
@@ -123,9 +123,17 @@ class Player extends GameObject
        // position.x = position.x + lx;
        // position.y = position.y + ly;
         
-       float totalAccel = 0.2;                 // how much ship accelerates
+       float totalAccel = 0.2;             // how much ship accelerates
        accel.x = totalAccel * sin(theta);  // total accel
        accel.y = -totalAccel * cos(theta); // total accel
+       
+       
+       position.get();
+       translate(position.x, position.y);   
+       rotate(theta);
+       line(position.x+5, position.y+10, position.x+5, position.y+15);
+      // line(-5, 10, -5, 15);
+      // line(0, 10, 0, 20);
 
         break;
       case 1:
