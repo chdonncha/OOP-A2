@@ -1,11 +1,13 @@
-class Stars
 
-  {    
-    // declare variables
+ 
+ class SmallStars
+ 
+  {
+    // declare variables    
     float starxpos, starypos, starwid, starhei;
     float starspeed;
     
-     Stars(float tempX, float tempY, float tempW, float tempH){
+     SmallStars(float tempX, float tempY, float tempW, float tempH){
        
      starxpos = tempX;    
      starypos = tempY;
@@ -14,17 +16,15 @@ class Stars
      
      starspeed = random(1,5);
      starxpos = random(0,width);
-     starypos = random(0,height);
+     starypos = random(0, height);
      
      }
          
   void displaystars() {
    
-
-    fill(255);
-    stroke(175);
-    rect(starxpos, starypos, starhei, starwid);
-     
+    noStroke();
+    fill(255);   
+    rect(starxpos, starypos, starhei, starwid);    
     
   }
     
@@ -32,6 +32,7 @@ class Stars
    
     if ( starypos <= 0) {
     starypos = height + 100;
+    
           } 
   
  }
@@ -43,4 +44,6 @@ class Stars
     displaystars();
     createstarloop();
   }
+  
  }
+

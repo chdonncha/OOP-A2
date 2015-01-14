@@ -217,7 +217,7 @@ class Menu extends GameObject
   
    // spell 2 Player
     stroke(255,255,255);
-  if (selected >= 1){
+  if (selected == 1){
     stroke(255,255,0);
   }
   
@@ -283,7 +283,7 @@ class Menu extends GameObject
   void move()
   {    
   
-    print(selected);
+    //print(selected);
     
     if(selected >= 2){
       selected = selected -1;
@@ -306,11 +306,13 @@ class Menu extends GameObject
         case 's':
         selected ++; 
         
+        
         break;  
         
-        case ENTER:
+        case ' ':
          isMainMenu = false; 
-     
+         gamemode = selected;
+         print(gamemode);
         break;  
        
         case BACKSPACE:

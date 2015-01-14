@@ -71,20 +71,6 @@ class Player extends GameObject
     //line(halfWidth, halfHeight, 0, 0);
     //  line(0,0,  - halfWidth, halfHeight);
 
-    if (keyPressed)
-    {
-      switch (key)
-      {
-      case 'w':
-
-      //    line(5, 10, 5, 15);
-     //  line(-5, 10, -5, 15);
-     //  line(0, 10, 0, 20);
-
-        break;
-      }
-    }
-
     popMatrix();
   }
 
@@ -127,14 +113,18 @@ class Player extends GameObject
        accel.x = totalAccel * sin(theta);  // total accel
        accel.y = -totalAccel * cos(theta); // total accel
        
+       pushMatrix();
        
-       position.get();
        translate(position.x, position.y);   
+       
        rotate(theta);
-       line(position.x+5, position.y+10, position.x+5, position.y+15);
-      // line(-5, 10, -5, 15);
-      // line(0, 10, 0, 20);
-
+       
+       line(5, 10, 5, 15);
+       line(-5, 10, -5, 15);
+       line(0, 10, 0, 20);
+       
+       popMatrix();
+      
         break;
       case 1:
        // position.y = position.y + 1;
@@ -161,8 +151,6 @@ class Player extends GameObject
 
   public int evalKey() {
     int contIndex = -1;
-    if (key == ' ')
-      contIndex = 4;
 
 print(keyCode + "\n");
 
@@ -180,6 +168,9 @@ print(keyCode + "\n");
       case 'd':
         contIndex = 3;
         break;
+        case ' ':
+        contIndex = 4;
+        break;
       }
     } else if (playerIndex == 1) {
       switch(keyCode) {
@@ -194,6 +185,9 @@ print(keyCode + "\n");
         break;
       case 39:
         contIndex = 3;
+        break;
+        case 17:
+        contIndex = 4;
         break;
       }
     }
