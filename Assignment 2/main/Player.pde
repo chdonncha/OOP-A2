@@ -7,10 +7,10 @@ class Player extends GameObject
   float fireRate = 10.0f;
   float ellapsed = 0.0f;
   float toPass = 15.0f / fireRate;
-  
+
   PVector accel = new PVector();//ship's acceleration
   PVector velocity = new PVector();//ship's speeds
-  
+
   int playerIndex = 0;
 
   Player(float x, float y, float w, float h, int playerIndex)
@@ -43,18 +43,17 @@ class Player extends GameObject
     h = 20;
     colour = color(255);
     theta = 0;
-    
   }
 
 
   void display()
   {
-   
+
     velocity.add(accel);
     position.add(velocity);
-    
+
     pushMatrix();
- 
+
     translate(position.x, position.y);   
     rotate(theta);
 
@@ -76,11 +75,11 @@ class Player extends GameObject
 
   void move()
   {    
-    
+
     accel.set(0, 0, 0); // cuase drag to slow ship down
-    
+
     // off screen loop
-   if (position.x < 0)
+    if (position.x < 0)
     {
       position.x = width;
     }
@@ -96,7 +95,7 @@ class Player extends GameObject
     {
       position.y = height;
     }
-    
+
     ellapsed += timeDelta;
     float lx, ly;
     lx = sin(theta);
@@ -106,28 +105,29 @@ class Player extends GameObject
       switch (evalKey())
       {
       case 0:
-       // position.x = position.x + lx;
-       // position.y = position.y + ly;
-        
-       float totalAccel = 0.2;             // how much ship accelerates
-       accel.x = totalAccel * sin(theta);  // total accel
-       accel.y = -totalAccel * cos(theta); // total accel
-       
-       pushMatrix();
-       
-       translate(position.x, position.y);   
-       
-       rotate(theta);
-       
-       line(5, 10, 5, 15);
-       line(-5, 10, -5, 15);
-       line(0, 10, 0, 20);
-       
-       popMatrix();
-      
+    
+        float totalAccel = 0.2;             // how much ship accelerates
+        accel.x = totalAccel * sin(theta);  // total accel
+        accel.y = -totalAccel * cos(theta); // total accel
+
+        pushMatrix();
+
+        translate(position.x, position.y);   
+
+        rotate(theta);
+
+        line(5, 10, 5, 15);
+        line(-5, 10, -5, 15);
+        line(0, 10, 0, 20);
+
+        popMatrix();
+
         break;
       case 1:
-       // position.y = position.y + 1;
+        // position.y = position.y + 1;
+        objects.clear();
+        isMainMenu = true;
+           objects.add(menu = new Menu());
         break;
       case 2:
         theta -= 0.1f;
@@ -152,7 +152,7 @@ class Player extends GameObject
   public int evalKey() {
     int contIndex = -1;
 
-print(keyCode + "\n");
+    print(keyCode + "\n");
 
     if (playerIndex == 0) {
       switch(key) {
@@ -168,7 +168,7 @@ print(keyCode + "\n");
       case 'd':
         contIndex = 3;
         break;
-        case ' ':
+      case ' ':
         contIndex = 4;
         break;
       }
@@ -186,7 +186,7 @@ print(keyCode + "\n");
       case 39:
         contIndex = 3;
         break;
-        case 17:
+      case 17:
         contIndex = 4;
         break;
       }

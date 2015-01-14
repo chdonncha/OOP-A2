@@ -312,11 +312,11 @@ class Menu extends GameObject
         objects.clear();
         switch(selected) {
         case 0:
-          objects.add(new Player(100, 250, 0)); 
+          objects.add(new Player(350, 300, 0)); 
           break;
         case 1:
-          objects.add(new Player(100, 250, 0)); 
-          objects.add(new Player(600, 250, 1)); 
+          objects.add(new Player(100, 300, 0)); 
+          objects.add(new Player(600, 300, 1)); 
           break;
         }
 
