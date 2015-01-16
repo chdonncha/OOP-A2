@@ -106,7 +106,7 @@ class Player extends GameObject
       {
       case 0:
     
-        float totalAccel = 0.2;             // how much ship accelerates
+        float totalAccel = 0.1;             // how much ship accelerates
         accel.x = totalAccel * sin(theta);  // total accel
         accel.y = -totalAccel * cos(theta); // total accel
 
@@ -159,7 +159,7 @@ class Player extends GameObject
       case 'w':
         contIndex = 0;
         break;
-      case 's':
+      case 'f':
         contIndex = 1;
         break;
       case 'a':

@@ -48,8 +48,10 @@ class Asteroids extends GameObject
 
   void display()
   {
-
-    velocity.add(accel);
+    
+    velocity.set(random(2,5), random(2,5)); // set the velocity
+    
+    //velocity.add(accel);
     position.add(velocity);
 
     pushMatrix();
@@ -64,9 +66,15 @@ class Asteroids extends GameObject
     fill(0, 255, 200);
     stroke(0, 255, 200);
 
+
+    rect(50,50,50,50);
+    
+    /*
     line(-halfWidth, halfHeight, 0, - halfHeight);
     line(0, - halfHeight, halfWidth, halfWidth);
     line(halfWidth - 3, halfHeight - 5, -7, +5);
+    */
+    
     //line(halfWidth, halfHeight, 0, 0);
     //  line(0,0,  - halfWidth, halfHeight);
 
@@ -77,7 +85,11 @@ class Asteroids extends GameObject
   {    
 
     accel.set(0, 0, 0); // cuase drag to slow ship down
-
+  //  accel = 1;
+    float totalAccel = 0.2;             // how much ship accelerates
+    accel.x = random(0, 0.200);  
+    accel.y = random(0, 0.200);
+    
     // off screen loop
     if (position.x < 0)
     {
@@ -100,97 +112,5 @@ class Asteroids extends GameObject
     float lx, ly;
     lx = sin(theta);
     ly = -cos(theta);
-    if (keyPressed)
-    {
-      switch (evalKey())
-      {
-      case 0:
-    
-        float totalAccel = 0.2;             // how much ship accelerates
-        accel.x = totalAccel * sin(theta);  // total accel
-        accel.y = -totalAccel * cos(theta); // total accel
-
-        pushMatrix();
-
-        translate(position.x, position.y);   
-
-        rotate(theta);
-
-        line(5, 10, 5, 15);
-        line(-5, 10, -5, 15);
-        line(0, 10, 0, 20);
-
-        popMatrix();
-
-        break;
-      case 1:
-        // position.y = position.y + 1;
-        objects.clear();
-        isMainMenu = true;
-           objects.add(menu = new Menu());
-        break;
-      case 2:
-        theta -= 0.1f;
-        break;
-      case 3:
-        theta += 0.1f;
-        break;  
-      case 4:
-        if (ellapsed > toPass)
-        {
-          Bullet bullet = new Bullet();
-          bullet.position = position.get();
-          bullet.theta = theta;
-          objects.add(bullet);
-          ellapsed = 0.0f;
-        }
-        break;
-      }
-    }
-  }
-
-  public int evalKey() {
-    int contIndex = -1;
-
-    print(keyCode + "\n");
-
-    if (playerIndex == 0) {
-      switch(key) {
-      case 'w':
-        contIndex = 0;
-        break;
-      case 's':
-        contIndex = 1;
-        break;
-      case 'a':
-        contIndex = 2;
-        break;
-      case 'd':
-        contIndex = 3;
-        break;
-      case ' ':
-        contIndex = 4;
-        break;
-      }
-    } else if (playerIndex == 1) {
-      switch(keyCode) {
-      case 38:
-        contIndex = 0;
-        break;
-      case 40:
-        contIndex = 1;
-        break;
-      case 37:
-        contIndex = 2;
-        break;
-      case 39:
-        contIndex = 3;
-        break;
-      case 17:
-        contIndex = 4;
-        break;
-      }
-    }
-    return contIndex;
   }
 }
