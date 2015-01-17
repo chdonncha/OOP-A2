@@ -1,4 +1,4 @@
-// Better to use an array list!
+import java.awt.Rectangle;
 ArrayList<GameObject> objects = new ArrayList<GameObject>(); 
 
 BigStar stars;

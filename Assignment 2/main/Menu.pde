@@ -313,7 +313,10 @@ class Menu extends GameObject
         switch(selected) {
         case 0:
           objects.add(new Player(350, 300, 0)); 
-          objects.add(new Asteroids(100, 300,0)); 
+          objects.add(new Asteroids()); 
+          objects.add(new Asteroids());
+          objects.add(new Asteroids());
+          objects.add(new Asteroids());    
           break;
         case 1:
           objects.add(new Player(100, 300, 0)); 
