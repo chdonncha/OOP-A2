@@ -4,7 +4,7 @@ class Menu extends GameObject
   PFont menufont;
   float halfWidth = width / 2;
   float halfHeight = height / 2;
-
+  PFont levelfont;
 
   void display()
   {
@@ -312,11 +312,18 @@ class Menu extends GameObject
         objects.clear();
         switch(selected) {
         case 0:
+        
           objects.add(new Player(350, 300, 0)); 
-          objects.add(new Asteroids()); 
+          
+          for (int i = 0; i < 1; i++) {
+            
+          objects.add(new Asteroids(random(0,width), random(0,height), 50, 5, i));
+          }
+          
+          /*objects.add(new Asteroids()); 
           objects.add(new Asteroids());
           objects.add(new Asteroids());
-          objects.add(new Asteroids());    
+          objects.add(new Asteroids());*/    
           break;
         case 1:
           objects.add(new Player(100, 300, 0)); 

@@ -1,15 +1,13 @@
 class Player extends GameObject
 {
-  float w, h;
-
   float timeDelta = 1.0f / 60.0f;
 
   float fireRate = 10.0f;
   float ellapsed = 0.0f;
   float toPass = 15.0f / fireRate;
+  float toPassB = 0.2f;
 
-  PVector accel = new PVector();//ship's acceleration
-  PVector velocity = new PVector();//ship's speeds
+  int max_bullets = 3;
 
   int playerIndex = 0;
 
@@ -45,9 +43,14 @@ class Player extends GameObject
     theta = 0;
   }
 
-
   void display()
   {
+
+
+    getBounds();
+
+    float halfWidth = w / 2; 
+    float  halfHeight = h / 2;
 
     velocity.add(accel);
     position.add(velocity);
@@ -58,8 +61,7 @@ class Player extends GameObject
     rotate(theta);
 
     stroke(colour);
-    float halfWidth = w / 2;
-    float  halfHeight = h / 2;
+
 
     fill(0, 255, 200);
     stroke(0, 255, 200);
@@ -71,6 +73,17 @@ class Player extends GameObject
     //  line(0,0,  - halfWidth, halfHeight);
 
     popMatrix();
+  }
+
+  void getBounds() {
+
+    float halfWidth = w / 2; 
+    float  halfHeight = h / 2;
+    stroke(255, 255, 0);  
+    noFill(); 
+   // rect(position.x - halfWidth, position.y - halfHeight, halfWidth * 2, halfHeight * 2);
+       rect(position.x, position.y, 50, 50);
+
   }
 
   void move()
@@ -105,7 +118,7 @@ class Player extends GameObject
       switch (evalKey())
       {
       case 0:
-    
+
         float totalAccel = 0.1;             // how much ship accelerates
         accel.x = totalAccel * sin(theta);  // total accel
         accel.y = -totalAccel * cos(theta); // total accel
@@ -127,7 +140,7 @@ class Player extends GameObject
         // position.y = position.y + 1;
         objects.clear();
         isMainMenu = true;
-           objects.add(menu = new Menu());
+        objects.add(menu = new Menu());
         break;
       case 2:
         theta -= 0.1f;
@@ -136,19 +149,23 @@ class Player extends GameObject
         theta += 0.1f;
         break;  
       case 4:
-        if (ellapsed > toPass)
-        {
-          Bullet bullet = new Bullet();
-          bullet.position = position.get();
-          bullet.theta = theta;
-          objects.add(bullet);
-          ellapsed = 0.0f;
+        if (ellapsed > toPassB) {
+print(size);
+          if (size > max_bullets)
+          {
+            Bullet bullet = new Bullet();
+            size +=1;
+            bullet.position = position.get();
+            bullet.theta = theta;
+            objects.add(bullet);
+            ellapsed = 0.0f;
+            
+          }
+          break;
         }
-        break;
       }
     }
   }
-
   public int evalKey() {
     int contIndex = -1;
 

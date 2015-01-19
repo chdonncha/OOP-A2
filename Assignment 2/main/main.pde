@@ -1,14 +1,19 @@
 import java.awt.Rectangle;
+import java.awt.Polygon;
+
 ArrayList<GameObject> objects = new ArrayList<GameObject>(); 
 
 BigStar stars;
 Menu menu;
+Asteroids asteroid;
 Stars[] Stars = new Stars[20];
 SmallStars[] SmallStars = new SmallStars[35];
 
 boolean isMainMenu = true;
 int selected = 0;
 int gamemode;
+int size;
+int level;
 
 void setup()
 {
@@ -54,6 +59,15 @@ void draw()
     {
       print("removed");
       objects.remove(i);
+      size -=1;
+    }
+  }
+
+  // Check for collisions
+  for (int i = 0; i < objects.size (); i++) {
+    for (int a = 0; a < objects.size (); a++) {
+      if (objects.get(a) != objects.get(i))
+        objects.get(i).checkCollision(objects.get(a));
     }
   }
 }

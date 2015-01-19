@@ -3,6 +3,7 @@ class Bullet extends GameObject
   float toLive = .7f;
   float ellapsed = 0.0;
   float timeDelta = 1.0f / 60.0f;
+ 
   
   Bullet()
   {
