@@ -81,9 +81,8 @@ class Player extends GameObject
     float  halfHeight = h / 2;
     stroke(255, 255, 0);  
     noFill(); 
-   // rect(position.x - halfWidth, position.y - halfHeight, halfWidth * 2, halfHeight * 2);
-       rect(position.x, position.y, 50, 50);
-
+    //rect(position.x - halfWidth, position.y - halfHeight, halfWidth * 2, halfHeight * 2);
+    //rect(position.x, position.y, 50, 50);
   }
 
   void move()
@@ -150,7 +149,7 @@ class Player extends GameObject
         break;  
       case 4:
         if (ellapsed > toPassB) {
-print(size);
+          print(size);
           if (size > max_bullets)
           {
             Bullet bullet = new Bullet();
@@ -159,7 +158,6 @@ print(size);
             bullet.theta = theta;
             objects.add(bullet);
             ellapsed = 0.0f;
-            
           }
           break;
         }
@@ -210,5 +208,11 @@ print(size);
     }
     return contIndex;
   }
+  
+  public void collide(GameObject other){
+    super.collide(other);
+    // Do stuff when player hit
+  }
+
 }
 

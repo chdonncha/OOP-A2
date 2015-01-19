@@ -2,12 +2,11 @@ class Asteroids extends GameObject
 {
 
   float timeDelta = 1.0f / 60.0f;
-
+  
+ public float Vx,Vy;
   float fireRate = 10.0f;
   float ellapsed = 0.0f;
   float toPass = 15.0f / fireRate;
-
-  // int id;
 
   float radius;
   float points;
@@ -16,15 +15,16 @@ class Asteroids extends GameObject
 
   int playerIndex = 0;
 
-  Asteroids(float x, float y, float radius, float points, int id)
+  Asteroids(float x, float y, float radius, float points)
   {
     position.x = x;
     position.y = y;
     this.radius = radius;
     this.points = points;
     this.theta = 0;
-
-   // velocity.set(random(-5, 5), random(-5, 5)); // set the velocity
+    this.Vx = -5;
+    this.Vy = 5;
+    velocity.set(random(Vx, Vy), random(Vx, Vy)); // set the velocity
   }
 
   //  Asteroids()
@@ -85,8 +85,8 @@ class Asteroids extends GameObject
 
     stroke(255, 255, 0);
     noFill();
-  //  rect(position.x - radius, position.y - radius, radius * 2, radius * 2);
-      rect(position.x, position.y, 50, 50);
+    //rect(position.x - radius, position.y - radius, radius * 2, radius * 2);
+    //  rect(position.x, position.y, 50, 50);
 
   }
 

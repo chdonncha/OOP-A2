@@ -66,8 +66,8 @@ void draw()
   // Check for collisions
   for (int i = 0; i < objects.size (); i++) {
     for (int a = 0; a < objects.size (); a++) {
-      if (objects.get(a) != objects.get(i))
-        objects.get(i).checkCollision(objects.get(a));
+        if(objects.get(i).checkCollision(objects.get(a)))
+        objects.get(i).collide(objects.get(a));
     }
   }
 }
