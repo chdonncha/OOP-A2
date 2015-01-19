@@ -1,36 +1,36 @@
 class Asteroids extends GameObject
 {
-  float w, h;
 
   float timeDelta = 1.0f / 60.0f;
-
+  
+ public float Vx,Vy;
   float fireRate = 10.0f;
   float ellapsed = 0.0f;
   float toPass = 15.0f / fireRate;
-  
- // int id;
-  
+
   float radius;
   float points;
 
-  PVector accel = new PVector();//ship's acceleration
-  PVector velocity = new PVector();//ship's speeds
+
 
   int playerIndex = 0;
 
-  Asteroids(float x, float y, float radius, float points, int id)
+  Asteroids(float x, float y, float radius, float points)
   {
     position.x = x;
     position.y = y;
     this.radius = radius;
     this.points = points;
     this.theta = 0;
+    this.Vx = -5;
+    this.Vy = 5;
+    velocity.set(random(Vx, Vy), random(Vx, Vy)); // set the velocity
   }
-  
-//  Asteroids()
-//  {
-//    this(random(0,width), random(0,height), 50, 5);
- // }
+
+  //  Asteroids()
+  //  {
+  //    this(random(0,width), random(0,height), 50, 5);
+  // }
 
 
   void display()
@@ -42,12 +42,12 @@ class Asteroids extends GameObject
     float lastx = 0, lasty = -radius;
     float theta1 = 0;
     float thetaInc = TWO_PI / (points * 2);
-    
-    velocity.set(random(2,5), random(2,5)); // set the velocity
-    
+
+
+
     //velocity.add(accel);
     position.add(velocity);
-    
+
     pushMatrix();
 
     translate(position.x, position.y);   
@@ -60,16 +60,15 @@ class Asteroids extends GameObject
     fill(0, 255, 200);
     stroke(0, 255, 200);
 
-    
-     for(int i = 0 ; i < (points * 2) ; i ++)
+
+    for (int i = 0; i < (points * 2); i ++)
     {
       theta1 += thetaInc;
       if (i % 2 == 1)
       {
         px = sin(theta1) * radius;
         py = -cos(theta1) * radius;
-      }
-      else
+      } else
       {
         px = sin(theta1) * (radius * 0.8f);
         py = -cos(theta1) * (radius * 0.8f);
@@ -77,37 +76,35 @@ class Asteroids extends GameObject
       line(lastx, lasty, px, py);
       lastx = px;
       lasty = py;
-      
-      
     }
-    
+
     popMatrix();
   }
 
-  void getBounds(){
-   
-   stroke(255, 255, 0);
-   noFill();
-   rect(position.x - radius, position.y - radius, radius * 2, radius * 2);
-    
+  void getBounds() {
+
+    stroke(255, 255, 0);
+    noFill();
+    //rect(position.x - radius, position.y - radius, radius * 2, radius * 2);
+    //  rect(position.x, position.y, 50, 50);
+
   }
-  
+
   void move()
   {
-    
-    
-  //  for (Asteroids != this){
-      
-    
-//    int tempx
+
+
+    //  for (Asteroids != this){
+
+    //    int tempx
     theta += 0.01;
-    
+
     accel.set(0, 0, 0); // cuase drag to slow ship down
-  //  accel = 1;
+    //  accel = 1;
     float totalAccel = 0.2;             // how much ship accelerates
-    accel.x = random(0, 0.200);  
-    accel.y = random(0, 0.200);
-    
+    accel.x = random(-200, 200);  
+    accel.y = random(-200, 200);
+
     // off screen loop
     if (position.x < 0)
     {
@@ -131,11 +128,8 @@ class Asteroids extends GameObject
     lx = sin(theta);
     ly = -cos(theta);
   }
-  
-  void detectCollision(){
-    
-  
-    
+
+  void detectCollision() {
   }
-  
 }
+

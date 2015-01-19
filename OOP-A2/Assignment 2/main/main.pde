@@ -1,4 +1,6 @@
 import java.awt.Rectangle;
+import java.awt.Polygon;
+
 ArrayList<GameObject> objects = new ArrayList<GameObject>(); 
 
 BigStar stars;
@@ -12,7 +14,7 @@ int selected = 0;
 int gamemode;
 int size;
 int level;
- 
+
 void setup()
 {
 
@@ -58,6 +60,14 @@ void draw()
       print("removed");
       objects.remove(i);
       size -=1;
+    }
+  }
+
+  // Check for collisions
+  for (int i = 0; i < objects.size (); i++) {
+    for (int a = 0; a < objects.size (); a++) {
+      if (objects.get(a) != objects.get(i))
+        objects.get(i).checkCollision(objects.get(a));
     }
   }
 }

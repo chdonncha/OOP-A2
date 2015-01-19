@@ -1,7 +1,5 @@
 class Player extends GameObject
 {
-  float w, h;
-
   float timeDelta = 1.0f / 60.0f;
 
   float fireRate = 10.0f;
@@ -10,9 +8,6 @@ class Player extends GameObject
   float toPassB = 0.2f;
 
   int max_bullets = 3;
-
-  PVector accel = new PVector();//ship's acceleration
-  PVector velocity = new PVector();//ship's speeds
 
   int playerIndex = 0;
 
@@ -86,7 +81,9 @@ class Player extends GameObject
     float  halfHeight = h / 2;
     stroke(255, 255, 0);  
     noFill(); 
-    rect(position.x - halfWidth, position.y - halfHeight, halfWidth * 2, halfHeight * 2);
+    //rect(position.x - halfWidth, position.y - halfHeight, halfWidth * 2, halfHeight * 2);
+       //rect(position.x, position.y, 50, 50);
+
   }
 
   void move()

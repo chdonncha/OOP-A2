@@ -315,9 +315,9 @@ class Menu extends GameObject
         
           objects.add(new Player(350, 300, 0)); 
           
-          for (int i = 0; i < 4; i++) {
+          for (int i = 0; i < 6; i++) {
             
-          objects.add(new Asteroids(random(0,width), random(0,height), 50, 5, i));
+          objects.add(new Asteroids(random(0,width), random(0,height), 25, 5));
           }
           
           /*objects.add(new Asteroids()); 
