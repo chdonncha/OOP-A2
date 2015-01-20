@@ -217,7 +217,7 @@ class Menu extends GameObject
 
       // spell 2 Player
       stroke(255, 255, 255);
-      if (selected == 1) {
+      if (selected >= 1) {
         stroke(255, 255, 0);
       }
 
@@ -303,7 +303,6 @@ class Menu extends GameObject
       case 's':
         selected ++; 
 
-
         break;  
 
       case ' ':
@@ -312,18 +311,18 @@ class Menu extends GameObject
         objects.clear();
         switch(selected) {
         case 0:
-        
+
           objects.add(new Player(350, 300, 0)); 
-          
+
           for (int i = 0; i < 6; i++) {
-            
-          objects.add(new Asteroids(random(0,width), random(0,height), 25, 5));
+
+            objects.add(new Asteroids(random(0, width), random(0, height), 25, 5));
           }
-          
+
           /*objects.add(new Asteroids()); 
-          objects.add(new Asteroids());
-          objects.add(new Asteroids());
-          objects.add(new Asteroids());*/    
+           objects.add(new Asteroids());
+           objects.add(new Asteroids());
+           objects.add(new Asteroids());*/
           break;
         case 1:
           objects.add(new Player(100, 300, 0)); 
@@ -335,8 +334,8 @@ class Menu extends GameObject
         break;  
 
       case BACKSPACE:
-     // objects.clear();
-     //  objects.add(menu = new Menu());
+        // objects.clear();
+        //  objects.add(menu = new Menu());
         isMainMenu = true; 
 
         break;

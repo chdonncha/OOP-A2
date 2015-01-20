@@ -8,7 +8,7 @@ class Player extends GameObject
   float toPassB = 0.2f;
 
   int max_bullets = 3;
-
+  int lives = 3;
   int playerIndex = 0;
 
   Player(float x, float y, float w, float h, int playerIndex)
@@ -88,6 +88,8 @@ class Player extends GameObject
   void move()
   {    
 
+
+
     accel.set(0, 0, 0); // cuase drag to slow ship down
 
     // off screen loop
@@ -150,17 +152,17 @@ class Player extends GameObject
       case 4:
         if (ellapsed > toPassB) {
           print(size);
-          if (size > max_bullets)
-          {
-            Bullet bullet = new Bullet();
-            size +=1;
-            bullet.position = position.get();
-            bullet.theta = theta;
-            objects.add(bullet);
-            ellapsed = 0.0f;
-          }
-          break;
+          // if (size > max_bullets)
+          // {
+          Bullet bullet = new Bullet();
+          size +=1;
+          bullet.position = position.get();
+          bullet.theta = theta;
+          objects.add(bullet);
+          ellapsed = 0.0f;
         }
+        break;
+        //  }
       }
     }
   }
@@ -208,11 +210,38 @@ class Player extends GameObject
     }
     return contIndex;
   }
-  
-  public void collide(GameObject other){
+
+  public void collide(GameObject other) {
     super.collide(other);
+
+    playerHit();
+    println(lives);
     // Do stuff when player hit
   }
 
+  void playerHit()
+  {
+
+    if (lives >0) 
+    {
+      lives --;
+
+      if (lives == lives --)
+      {
+
+        alive = false;
+        objects.add(new Player(350, 300, 0));
+      } else
+      {
+        alive = false;
+      }
+      /*
+        if (lives == 0)
+       {
+       alive = false;
+       }
+       */
+    }
+  }
 }
 
