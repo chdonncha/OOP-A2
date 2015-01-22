@@ -2,8 +2,8 @@ class Asteroids extends GameObject
 {
 
   float timeDelta = 1.0f / 60.0f;
-  
- public float Vx,Vy;
+
+  public float Vx, Vy;
   float fireRate = 10.0f;
   float ellapsed = 0.0f;
   float toPass = 15.0f / fireRate;
@@ -11,6 +11,7 @@ class Asteroids extends GameObject
   float radius;
   float points;
 
+  int size = 1;
 
 
   int playerIndex = 0;
@@ -25,6 +26,22 @@ class Asteroids extends GameObject
     this.Vx = -5;
     this.Vy = 5;
     velocity.set(random(Vx, Vy), random(Vx, Vy)); // set the velocity
+    w = h = radius * 1.5;
+  }
+
+  Asteroids(float x, float y, float radius, float points, int size)
+  {
+    position.x = x;
+    position.y = y;
+    this.radius = radius;
+    this.points = points;
+    this.theta = 0;
+    this.Vx = -5;
+    this.Vy = 5;
+    velocity.set(random(Vx, Vy), random(Vx, Vy)); // set the velocity
+    w = h = radius * 1.5;
+    this.size = size;
+    print(velocity);
   }
 
   //  Asteroids()
@@ -42,9 +59,7 @@ class Asteroids extends GameObject
     float lastx = 0, lasty = -radius;
     float theta1 = 0;
     float thetaInc = TWO_PI / (points * 2);
-
-
-
+   
     //velocity.add(accel);
     position.add(velocity);
 
@@ -87,13 +102,10 @@ class Asteroids extends GameObject
     noFill();
     //rect(position.x - radius, position.y - radius, radius * 2, radius * 2);
     //  rect(position.x, position.y, 50, 50);
-
   }
 
   void move()
   {
-
-
     //  for (Asteroids != this){
 
     //    int tempx
@@ -130,6 +142,47 @@ class Asteroids extends GameObject
   }
 
   void detectCollision() {
+  }
+
+  public void collide(GameObject other) {
+    super.collide(other);
+
+    if (other instanceof Bullet) {
+      // !(other instanceof Bullet) opposite of
+      asteroidHit();
+      explosion();
+      print("bellet");
+
+      for (int i = 0; i < 2; i++) {
+        if (size > 0)
+          objects.add(new Asteroids(position.x - random(-40, 40), position.y - random(-40, 40), 15, 5, size -  1));
+      }
+    }
+  }
+
+  void asteroidHit()
+  {
+    alive = false;
+  }
+  void rockSize()
+  {
+    //3 different sizes for the asteroids
+    //includes the scores provided for each asteroid size destroyed
+  }
+
+  void explosion()
+  {
+    float speed = random(-1, 1);
+    float xpos;
+    float ypos;
+
+    xpos = position.x;
+    ypos = position.y;
+
+    xpos += speed;
+    ypos += speed;
+
+    rect(xpos, ypos, 1, 1);
   }
 }
 

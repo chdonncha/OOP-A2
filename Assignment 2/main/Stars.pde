@@ -22,7 +22,7 @@ class Stars
    
 
     fill(255);
-    stroke(175);
+    noStroke();
     rect(starxpos, starypos, starhei, starwid);
      
     

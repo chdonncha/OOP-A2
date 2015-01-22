@@ -7,8 +7,10 @@ class Player extends GameObject
   float toPass = 15.0f / fireRate;
   float toPassB = 0.2f;
 
+  Boolean timerT = false;
+
   int max_bullets = 3;
-  int lives = 3;
+  public int lives = 3;
   int playerIndex = 0;
 
   Player(float x, float y, float w, float h, int playerIndex)
@@ -46,7 +48,6 @@ class Player extends GameObject
   void display()
   {
 
-
     getBounds();
 
     float halfWidth = w / 2; 
@@ -71,8 +72,22 @@ class Player extends GameObject
     line(halfWidth - 3, halfHeight - 5, -7, +5);
     //line(halfWidth, halfHeight, 0, 0);
     //  line(0,0,  - halfWidth, halfHeight);
-
     popMatrix();
+    /*
+float size = 100;
+     float speed = 1;
+     if (timerT) {
+     
+     size = size + speed;
+     // velocity = (0,0);
+     noStroke();
+     fill(random(0, 255), random(0, 255), random(0, 255));
+     ellipse(position.x, position.y, size, size);
+     }
+     if (frameCount > 200)
+     {
+     timerT = false;
+     }*/
   }
 
   void getBounds() {
@@ -87,8 +102,6 @@ class Player extends GameObject
 
   void move()
   {    
-
-
 
     accel.set(0, 0, 0); // cuase drag to slow ship down
 
@@ -151,7 +164,7 @@ class Player extends GameObject
         break;  
       case 4:
         if (ellapsed > toPassB) {
-          print(size);
+          //print(size);
           // if (size > max_bullets)
           // {
           Bullet bullet = new Bullet();
@@ -169,7 +182,7 @@ class Player extends GameObject
   public int evalKey() {
     int contIndex = -1;
 
-    print(keyCode + "\n");
+    //print(keyCode + "\n");
 
     if (playerIndex == 0) {
       switch(key) {
@@ -212,35 +225,48 @@ class Player extends GameObject
   }
 
   public void collide(GameObject other) {
-    super.collide(other);
-
+    if (!(other instanceof Bullet))
+      super.collide(other);
+    lives --;
+    frameCount = 0;
     playerHit();
-    println(lives);
+
     // Do stuff when player hit
   }
 
   void playerHit()
   {
+    timerT = true;
+    /*
+    if (lives >0)
+     {
+     alive = false;
+     } else
+     */
 
-    if (lives >0) 
+    /*else
+     {
+     alive = false;
+     }
+     if (lives == 0)
+     {
+     alive = false;
+     gameOver();
+     }
+     }
+     */
+  }
+
+  void pGameOver()
+  {
+
+    //float counter = 0.2f;
+    //float ellapsedTime = 0.0f;
+    // ellapsedTime++;   
+    alive = false;
+    if ((int)(frameCount / 60) == 1)
     {
-      lives --;
-
-      if (lives == lives --)
-      {
-
-        alive = false;
-        objects.add(new Player(350, 300, 0));
-      } else
-      {
-        alive = false;
-      }
-      /*
-        if (lives == 0)
-       {
-       alive = false;
-       }
-       */
+      background(random(0, 255), random(0, 255), random(0, 255));
     }
   }
 }

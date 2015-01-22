@@ -1,4 +1,4 @@
-class Bullet extends GameObject
+class Bullet extends GameObject 
 {
   float toLive = .7f;
   float ellapsed = 0.0;
@@ -9,6 +9,8 @@ class Bullet extends GameObject
   {
     position.x = width / 2;  
     position.y = height / 2;
+    w = 2;
+    h = 2;
   }
   
   void move()
@@ -49,5 +51,21 @@ class Bullet extends GameObject
     rotate(theta);
     rect(1,1,1,1);
     popMatrix();
+  }
+  
+  public void collide(GameObject other) {
+    super.collide(other);
+    if (other instanceof Asteroids) {
+      
+      alive = false;
+    }
+    //bulletHit;
+    //println(lives);
+    // Do stuff when player hit
+  }
+  
+  void bulletHit()
+  {
+    alive = false;
   }
 }

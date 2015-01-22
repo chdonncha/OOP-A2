@@ -27,31 +27,28 @@ abstract class GameObject
   } 
 
   public boolean checkCollision(GameObject other) {
+    float halfWidth = w / 2; 
+    float  halfHeight = h / 2;
     if (other == this)
       return false;
-    Asteroids rock = new Asteroids(random(0, width), random(0, height), 50, 5);
 
-    Rectangle thisBounds = new Rectangle((int)position.x, (int)position.y, (int)rock.radius, (int)rock.radius);
-    Rectangle otherBounds = new Rectangle((int)other.position.x, (int)other.position.y, 25, 25);
+
+    Rectangle thisBounds = new Rectangle((int)position.x, (int)position.y, (int)w, (int)h);
+    Rectangle otherBounds = new Rectangle((int)other.position.x, (int)other.position.y, (int)other.w, (int)other.h);
+    //Rectangle otherBounds = new Rectangle((int)other.position.x, (int)other.position.y, (int)rock.radius, (int)rock.radius);
+    //rect(thisBounds.x,thisBounds.y,thisBounds.width,thisBounds.height);
+    //rect(otherBounds.x,otherBounds.y,otherBounds.width,otherBounds.height);
     //  PVector thisVelocity = new PVector(player.Velocity);
     //  print(other.getClass() + " : " + otherBounds.x + "\n");
 
-    return otherBounds.intersects(thisBounds);
+    return thisBounds.intersects(otherBounds);
   }
-  
-  public void collide(GameObject other){
-    
-      // this.velocity = new PVector(0,0);
 
-      // this.Vx = rock.Vx;
-      //  this.Vy = rock.Vy;
-
-      //tempVx * Vx, tempVy * Vy
-      PVector temp = other.velocity;
-      other.velocity = this.velocity;
-      this.velocity = temp;
-      //print(tmp);
+  public void collide(GameObject other) {
+        PVector temp = other.velocity;
+  PVector newDir = new PVector(position.x - other.position.x, position.y - other.position.y);
+  newDir.normalize();
+  this.velocity =  new PVector(newDir.x * 3f, newDir.y * 3f);
   }
-  
 }
 

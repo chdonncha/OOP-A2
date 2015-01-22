@@ -311,18 +311,8 @@ class Menu extends GameObject
         objects.clear();
         switch(selected) {
         case 0:
-
-          objects.add(new Player(350, 300, 0)); 
-
-          for (int i = 0; i < 6; i++) {
-
-            objects.add(new Asteroids(random(0, width), random(0, height), 25, 5));
-          }
-
-          /*objects.add(new Asteroids()); 
-           objects.add(new Asteroids());
-           objects.add(new Asteroids());
-           objects.add(new Asteroids());*/
+         // objects.add(highScore = new HighScore());
+           levelStart();
           break;
         case 1:
           objects.add(new Player(100, 300, 0)); 
@@ -341,6 +331,31 @@ class Menu extends GameObject
         break;
       }
     }
+  }
+  void levelStart()
+  {
+    float amount =6;
+    float level =1;
+    boolean ready = false;
+    float timer;
+    timer = millis();
+
+    //if (timer == 20000)
+    ready = true;
+    if (ready) {
+
+      objects.add(new Player(350, 300, 0)); 
+
+      for (int i = 0; i < amount; i++) {
+
+        objects.add(new Asteroids(random(0, width), random(0, height), 30, 5));
+      }
+    }
+  }
+
+  void gameOver()
+  {
+    text("Click to reset", width/2, height*.95);
   }
 }
 
