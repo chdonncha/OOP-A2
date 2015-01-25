@@ -1,5 +1,6 @@
 import java.awt.Rectangle;
 import java.awt.Polygon;
+import ddf.minim.*;
 
 ArrayList<GameObject> objects = new ArrayList<GameObject>(); 
 
@@ -7,23 +8,27 @@ BigStar stars;
 Menu menu;
 HighScore highScore;
 Asteroids asteroid;
-Asteroids smallAsteroid;
+Minim minim;
+AudioPlayer sou;
+Audio audio;
 Stars[] Stars = new Stars[80];
 
 
 boolean isMainMenu = true;
 int selected = 0;
+int selected2PLAYER = 0;
 int gamemode;
 int size;
 int level;
+int asteroidAmount = 1;
 
 void setup()
 {
 
-  size(700, 600);
-
+  size(800, 600);
+  audio = new Audio(new Minim(this));
   // noLoop();
-  objects.add(menu = new Menu());
+  objects.add(menu = new Menu(audio));
 
   for (int i = 0; i < Stars.length; i++) {
     Stars[i] = new Stars(i*50, 150, random(1, 2), random(1, 2));
@@ -61,4 +66,6 @@ void draw()
     }
   }
 }
+
+
 

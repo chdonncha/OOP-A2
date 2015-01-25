@@ -41,7 +41,6 @@ class Asteroids extends GameObject
     velocity.set(random(Vx, Vy), random(Vx, Vy)); // set the velocity
     w = h = radius * 1.5;
     this.size = size;
-    print(velocity);
   }
 
   //  Asteroids()
@@ -59,7 +58,7 @@ class Asteroids extends GameObject
     float lastx = 0, lasty = -radius;
     float theta1 = 0;
     float thetaInc = TWO_PI / (points * 2);
-   
+
     //velocity.add(accel);
     position.add(velocity);
 
@@ -139,6 +138,8 @@ class Asteroids extends GameObject
     float lx, ly;
     lx = sin(theta);
     ly = -cos(theta);
+
+    //asteroidHit();
   }
 
   void detectCollision() {
@@ -151,13 +152,16 @@ class Asteroids extends GameObject
       // !(other instanceof Bullet) opposite of
       asteroidHit();
       explosion();
-      print("bellet");
 
       for (int i = 0; i < 2; i++) {
         if (size > 0)
           objects.add(new Asteroids(position.x - random(-40, 40), position.y - random(-40, 40), 15, 5, size -  1));
       }
     }
+  }
+
+  void asteroidCheck()
+  {
   }
 
   void asteroidHit()

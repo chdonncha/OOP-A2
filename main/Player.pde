@@ -7,13 +7,14 @@ class Player extends GameObject
   float toPass = 15.0f / fireRate;
   float toPassB = 0.2f;
 
+  Audio audio;
   Boolean timerT = false;
 
   int max_bullets = 3;
   public int lives = 3;
   int playerIndex = 0;
 
-  Player(float x, float y, float w, float h, int playerIndex)
+  Player( float x, float y, float w, float h, int playerIndex)
   {
     this.playerIndex = playerIndex;
     position.x = x;
@@ -24,9 +25,10 @@ class Player extends GameObject
     theta = 0;
   }
 
-  Player(float x, float y, int playerIndex)
+  Player(Audio audio, float x, float y, int playerIndex)
   {
     this.playerIndex = playerIndex;
+    this.audio = audio;
     position.x = x;
     position.y = y;
     h = 20;
@@ -73,21 +75,6 @@ class Player extends GameObject
     //line(halfWidth, halfHeight, 0, 0);
     //  line(0,0,  - halfWidth, halfHeight);
     popMatrix();
-    /*
-float size = 100;
-     float speed = 1;
-     if (timerT) {
-     
-     size = size + speed;
-     // velocity = (0,0);
-     noStroke();
-     fill(random(0, 255), random(0, 255), random(0, 255));
-     ellipse(position.x, position.y, size, size);
-     }
-     if (frameCount > 200)
-     {
-     timerT = false;
-     }*/
   }
 
   void getBounds() {
@@ -154,7 +141,7 @@ float size = 100;
         // position.y = position.y + 1;
         objects.clear();
         isMainMenu = true;
-        objects.add(menu = new Menu());
+        objects.add(menu = new Menu(audio));
         break;
       case 2:
         theta -= 0.1f;
@@ -171,6 +158,7 @@ float size = 100;
           size +=1;
           bullet.position = position.get();
           bullet.theta = theta;
+          audio.Laser1();
           objects.add(bullet);
           ellapsed = 0.0f;
         }
@@ -225,37 +213,63 @@ float size = 100;
   }
 
   public void collide(GameObject other) {
-    if (!(other instanceof Bullet))
-      super.collide(other);
-    lives --;
-    frameCount = 0;
-    playerHit();
+    if (!(other instanceof Bullet)) //if player does not hit a bullet
+    {
+      if (!(other instanceof Player)) // if player does not hit a player
+      {
+        super.collide(other);
+        lives = lives -1;
+        frameCount = 0;
+        playerHit();
+        audio.Hit1();
+        //   explosion();
+        // Do stuff when player hit
+      }
+    }
 
-    // Do stuff when player hit
+
+    if (other instanceof Player) //if two players collide, rebound
+    {
+      PVector temp = other.velocity;
+      PVector newDir = new PVector(position.x - other.position.x, position.y - other.position.y);
+      newDir.normalize();
+      this.velocity =  new PVector(newDir.x * 3f, newDir.y * 3f);
+    }
   }
 
   void playerHit()
   {
-    timerT = true;
-    /*
-    if (lives >0)
-     {
-     alive = false;
-     } else
-     */
+    // float eTime;
+    // eTime = millis();
+    // timerT = true;
 
-    /*else
-     {
-     alive = false;
-     }
-     if (lives == 0)
-     {
-     alive = false;
-     gameOver();
-     }
-     }
-     */
+    if (lives <=0)
+    {
+
+      //   eTime = 0;
+      //   if (eTime == 10000)
+      //  {
+      alive = false;
+      objects.clear();
+      isMainMenu = !isMainMenu;
+      objects.add(new Menu(audio));
+      asteroidAmount = 0;
+      //  } else
+    }
   }
+
+  /*else
+   {
+   alive = false;
+   }
+   if (lives == 0)
+   {
+   alive = false;
+   gameOver();
+   }
+   }
+   */
+
 
   void pGameOver()
   {
@@ -267,6 +281,25 @@ float size = 100;
     if ((int)(frameCount / 60) == 1)
     {
       background(random(0, 255), random(0, 255), random(0, 255));
+    }
+  }
+
+  void explosion()
+  {
+
+    float size = 100;
+    float speed = 1;
+    if (timerT) {
+
+      size = size + speed;
+      // velocity = (0,0);
+      noStroke();
+      fill(random(0, 255), random(0, 255), random(0, 255));
+      ellipse(position.x, position.y, size, size);
+    }
+    if (frameCount > 200)
+    {
+      timerT = false;
     }
   }
 }
