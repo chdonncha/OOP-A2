@@ -51,7 +51,7 @@ class Player extends GameObject
   {
 
     getBounds();
-
+    lifeDisplayP1();
     float halfWidth = w / 2; 
     float  halfHeight = h / 2;
 
@@ -141,6 +141,7 @@ class Player extends GameObject
         // position.y = position.y + 1;
         objects.clear();
         isMainMenu = true;
+        is2PLAYERMenu = false;
         objects.add(menu = new Menu(audio));
         break;
       case 2:
@@ -254,6 +255,7 @@ class Player extends GameObject
       isMainMenu = !isMainMenu;
       objects.add(new Menu(audio));
       asteroidAmount = 0;
+      is2PLAYERMenu = !is2PLAYERMenu;
       //  } else
     }
   }
@@ -300,6 +302,21 @@ class Player extends GameObject
     if (frameCount > 200)
     {
       timerT = false;
+    }
+  }
+
+  void lifeDisplayP1()
+  {
+    int x = 20;
+    int y = 70;
+
+    for (int i=0; i<lives; i++) {
+
+      line(x, y, x + 15, y - 25);
+      line(x + 30, y, x + 15, y - 25);
+      line(x + 5, y - 7, x + 25, y - 7);
+
+      x+=50;
     }
   }
 }

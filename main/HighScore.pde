@@ -5,7 +5,6 @@ class HighScore extends GameObject
   int score;
 
   void setup() {
-    size(400, 400);
     textSize(30);
     for (int i=0; i<scores.length; i++) {
       scores[i] = 1000;

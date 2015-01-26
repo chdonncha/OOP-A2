@@ -2,21 +2,20 @@ class Asteroids extends GameObject
 {
 
   float timeDelta = 1.0f / 60.0f;
-
   public float Vx, Vy;
   float fireRate = 10.0f;
   float ellapsed = 0.0f;
   float toPass = 15.0f / fireRate;
-
   float radius;
   float points;
 
   int size = 1;
-
-
   int playerIndex = 0;
 
-  Asteroids(float x, float y, float radius, float points)
+  Audio audio;
+  
+  // medium Asteroid
+  Asteroids(Audio audio, float x, float y, float radius, float points)
   {
     position.x = x;
     position.y = y;
@@ -25,11 +24,14 @@ class Asteroids extends GameObject
     this.theta = 0;
     this.Vx = -5;
     this.Vy = 5;
+    this.audio = audio;
     velocity.set(random(Vx, Vy), random(Vx, Vy)); // set the velocity
-    w = h = radius * 1.5;
+    w = radius * 2;
+    h = radius * 2;
   }
-
-  Asteroids(float x, float y, float radius, float points, int size)
+  
+  // small Asteroid
+  Asteroids(Audio audio, float x, float y, float radius, float points, int size)
   {
     position.x = x;
     position.y = y;
@@ -38,8 +40,9 @@ class Asteroids extends GameObject
     this.theta = 0;
     this.Vx = -5;
     this.Vy = 5;
+    this.audio = audio;
     velocity.set(random(Vx, Vy), random(Vx, Vy)); // set the velocity
-    w = h = radius * 1.5;
+    w = h = 25;
     this.size = size;
   }
 
@@ -152,10 +155,12 @@ class Asteroids extends GameObject
       // !(other instanceof Bullet) opposite of
       asteroidHit();
       explosion();
+      audio.Explosion1();
+      scoreCounter = scoreCounter + 50;
 
       for (int i = 0; i < 2; i++) {
         if (size > 0)
-          objects.add(new Asteroids(position.x - random(-40, 40), position.y - random(-40, 40), 15, 5, size -  1));
+          objects.add(new Asteroids(audio,position.x - random(-40, 40), position.y - random(-40, 40), 15, 5, size -  1));
       }
     }
   }

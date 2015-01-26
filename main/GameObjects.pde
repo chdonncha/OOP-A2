@@ -23,7 +23,7 @@ abstract class GameObject
 
   void display()
   {
-    println("display getting called");
+    //println("display getting called");
   } 
 
   public boolean checkCollision(GameObject other) {
@@ -32,8 +32,9 @@ abstract class GameObject
     if (other == this)
       return false;
 
-    Rectangle thisBounds = new Rectangle((int)position.x, (int)position.y, (int)w, (int)h);
-    Rectangle otherBounds = new Rectangle((int)other.position.x, (int)other.position.y, (int)other.w, (int)other.h);
+    Rectangle thisBounds = new Rectangle((int)position.x - (int)(w / 2), (int)position.y - (int)(h / 2), (int)w, (int)h);
+    Rectangle otherBounds = new Rectangle((int)other.position.x - (int)(other.w / 2), (int)other.position.y - (int)(other.h / 2), (int)other.w, (int)other.h);
+    //rect(position.x - (w / 2),position.y - (h / 2),w,h);
     //Rectangle otherBounds = new Rectangle((int)other.position.x, (int)other.position.y, (int)rock.radius, (int)rock.radius);
     //rect(thisBounds.x,thisBounds.y,thisBounds.width,thisBounds.height);
     //rect(otherBounds.x,otherBounds.y,otherBounds.width,otherBounds.height);

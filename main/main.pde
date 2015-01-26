@@ -7,6 +7,7 @@ ArrayList<GameObject> objects = new ArrayList<GameObject>();
 BigStar stars;
 Menu menu;
 HighScore highScore;
+Score score;
 Asteroids asteroid;
 Minim minim;
 AudioPlayer sou;
@@ -15,12 +16,14 @@ Stars[] Stars = new Stars[80];
 
 
 boolean isMainMenu = true;
+boolean is2PLAYERMenu = false;
 int selected = 0;
 int selected2PLAYER = 0;
 int gamemode;
 int size;
 int level;
 int asteroidAmount = 1;
+int scoreCounter;
 
 void setup()
 {

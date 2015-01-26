@@ -11,7 +11,7 @@ class Level extends GameObject
   void levels()
   {
 
-    if (selected == 0) {
+    if (selected == 0 || selected2PLAYER == 0 ) {
 
       boolean containsAsteroids = false;
 
@@ -29,13 +29,12 @@ class Level extends GameObject
 
       //  level = level + 1;
        // asteroidAmount = level;
-        println(level);
         containsAsteroids = true;
         asteroidAmount = asteroidAmount + 1;
 
         for (int i = 0; i < asteroidAmount; i++) {
 
-          objects.add(new Asteroids(random(0, width), random(0, height), 30, 5));
+          objects.add(new Asteroids(audio,random(0, width), random(0, height), 30, 5));
         }
         println(containsAsteroids);
       }

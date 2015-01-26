@@ -17,18 +17,27 @@ class Audio
   //    audioMusic();
   //  }
 
-  void Hit1() {
+  void Hit1() 
+  {
     sou = minim.loadFile("Hit1.wav");
     sou.play();
   }
 
-  void Laser1() {
+  void Laser1()
+  {
     sou = minim.loadFile("Laser1.wav");
     sou.play();
   }
 
-  void menuSelect1() {
+  void menuSelect1() 
+  {
     sou = minim.loadFile("menuSelect1.wav");
+    sou.play();
+  }
+
+  void Explosion1()
+  {
+    sou = minim.loadFile("Explosion1.wav");
     sou.play();
   }
 }
