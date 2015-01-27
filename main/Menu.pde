@@ -89,10 +89,14 @@ class Menu extends GameObject
   void move()
   {    
     limiter();
+   // menu2PLayer();
     //print(selected);
+  }
 
-    if (keyPressed)
-    {
+  void keyReleased()
+  {
+    println("called");
+
       switch (key)
       {
 
@@ -101,10 +105,7 @@ class Menu extends GameObject
         {
           selected --;
         }
-        if (is2PLAYERMenu)
-        {
-          selected2PLAYER --;
-        }
+
         audio.menuSelect1();
         break;  
       case 's':
@@ -112,10 +113,7 @@ class Menu extends GameObject
         {
           selected ++;
         }
-        if (is2PLAYERMenu)
-        {
-          selected2PLAYER ++;
-        }
+
         audio.menuSelect1();
         break;  
 
@@ -136,8 +134,48 @@ class Menu extends GameObject
             isMainMenu = false;
             is2PLAYERMenu = true; 
             break;
+
+          case 2:
+            // high score list
+            break;
+
+          case 3:
+            objects.clear();
+            objects.add(new Instructions());    
+            isMainMenu = false;
+            break;
           }
         }
+        // break;
+      }
+    
+  }
+/*
+  void menu2PLayer()
+  {
+    if (keyPressed)
+    {
+      switch (key)
+      {
+
+      case 'w':
+
+        if (is2PLAYERMenu)
+        {
+          selected2PLAYER --;
+        }
+        audio.menuSelect1();
+        break;  
+      case 's':
+
+        if (is2PLAYERMenu)
+        {
+          selected2PLAYER ++;
+        }
+        audio.menuSelect1();
+        break;  
+
+      case 'h':
 
         if (is2PLAYERMenu)
         {
@@ -146,21 +184,22 @@ class Menu extends GameObject
             objects.clear();  
             levelStart();
             objects.add(new Player(audio, 600, 300, 1)); 
+            objects.add(score = new Score());
             break;
           case 1:
             isMainMenu = false;
             is2PLAYERMenu = true; 
+            objects.clear();
             // menu2PLAYER();
             objects.add(new Player(audio, 100, 300, 0)); 
             objects.add(new Player(audio, 600, 300, 1)); 
             break;
           }
         }
-        // break;
       }
     }
   }
-
+*/
   void limiter()
   {
     if (selected == 4) {

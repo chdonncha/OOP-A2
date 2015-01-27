@@ -22,8 +22,8 @@ class Asteroids extends GameObject
     this.radius = radius;
     this.points = points;
     this.theta = 0;
-    this.Vx = -5;
-    this.Vy = 5;
+    this.Vx = -3;
+    this.Vy = 3;
     this.audio = audio;
     velocity.set(random(Vx, Vy), random(Vx, Vy)); // set the velocity
     w = radius * 2;

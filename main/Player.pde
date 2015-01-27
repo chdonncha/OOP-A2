@@ -4,11 +4,15 @@ class Player extends GameObject
 
   float fireRate = 10.0f;
   float ellapsed = 0.0f;
+  float timer;
   float toPass = 15.0f / fireRate;
   float toPassB = 0.2f;
+  color colourP1;
+  color colourP2;
 
   Audio audio;
   Boolean timerT = false;
+  Boolean endGame = false;
 
   int max_bullets = 3;
   public int lives = 3;
@@ -21,7 +25,6 @@ class Player extends GameObject
     position.y = y;
     this.w = w;
     this.h = h;
-    colour = color(255);
     theta = 0;
   }
 
@@ -52,8 +55,35 @@ class Player extends GameObject
 
     getBounds();
     lifeDisplayP1();
+    drawPlayer();
+    println(timer);
+    /*(timer >= 10000)
+     {
+     textSize(20);
+     text("level " + level, width / 2, height / 2);
+     }*/
+  }
+
+  void move()
+  {    
+
+    accel.set(0, 0, 0); // cuase drag to slow ship down
+
+    screenLoop();
+
+    ellapsed += timeDelta;
+    float lx, ly;
+    lx = sin(theta);
+    ly = -cos(theta);
+
+    keys();
+  }
+
+  void drawPlayer()
+  {
     float halfWidth = w / 2; 
     float  halfHeight = h / 2;
+    timer = millis();
 
     velocity.add(accel);
     position.add(velocity);
@@ -63,17 +93,22 @@ class Player extends GameObject
     translate(position.x, position.y);   
     rotate(theta);
 
-    stroke(colour);
+    colourP1 = color(0, 255, 0);
+    colourP2 = color(255, 0, 255);
 
-
-    fill(0, 255, 200);
-    stroke(0, 255, 200);
-
+    if (playerIndex == 0)
+    {
+      stroke(colourP1);
+    }
+    if (playerIndex == 1)
+    {
+      stroke(colourP2);
+    }
+    // stroke(0, 255, 200);
     line(-halfWidth, halfHeight, 0, - halfHeight);
     line(0, - halfHeight, halfWidth, halfWidth);
     line(halfWidth - 3, halfHeight - 5, -7, +5);
-    //line(halfWidth, halfHeight, 0, 0);
-    //  line(0,0,  - halfWidth, halfHeight);
+
     popMatrix();
   }
 
@@ -87,33 +122,8 @@ class Player extends GameObject
     //rect(position.x, position.y, 50, 50);
   }
 
-  void move()
+  void keys()
   {    
-
-    accel.set(0, 0, 0); // cuase drag to slow ship down
-
-    // off screen loop
-    if (position.x < 0)
-    {
-      position.x = width;
-    }
-    if (position.x > width)
-    {
-      position.x = 0;
-    }
-    if (position.y > height)
-    {
-      position.y = 0;
-    }
-    if (position.y < 0)
-    {
-      position.y = height;
-    }
-
-    ellapsed += timeDelta;
-    float lx, ly;
-    lx = sin(theta);
-    ly = -cos(theta);
     if (keyPressed)
     {
       switch (evalKey())
@@ -166,6 +176,27 @@ class Player extends GameObject
         break;
         //  }
       }
+    }
+  }
+
+  void screenLoop()
+  {
+    // off screen loop
+    if (position.x < 0)
+    {
+      position.x = width;
+    }
+    if (position.x > width)
+    {
+      position.x = 0;
+    }
+    if (position.y > height)
+    {
+      position.y = 0;
+    }
+    if (position.y < 0)
+    {
+      position.y = height;
     }
   }
   public int evalKey() {
@@ -240,38 +271,34 @@ class Player extends GameObject
 
   void playerHit()
   {
-    // float eTime;
-    // eTime = millis();
-    // timerT = true;
 
     if (lives <=0)
     {
-
-      //   eTime = 0;
-      //   if (eTime == 10000)
-      //  {
       alive = false;
       objects.clear();
-      isMainMenu = !isMainMenu;
-      objects.add(new Menu(audio));
-      asteroidAmount = 0;
-      is2PLAYERMenu = !is2PLAYERMenu;
-      //  } else
+      objects.add(new GameOverMenu());
     }
+    /*
+      for (int i = 0; i < objects.size (); i++)
+     {
+     if (objects.get(i) instanceof Player)
+     {
+     endGame = true;
+     break;
+     }
+     }
+     
+     if(endGame)
+     {
+     objects.clear();
+     //  isMainMenu = !isMainMenu;
+     //  objects.add(new Menu(audio));
+     asteroidAmount = 0;
+     //  is2PLAYERMenu = !is2PLAYERMenu;
+     
+     }
+     */
   }
-
-  /*else
-   {
-   alive = false;
-   }
-   if (lives == 0)
-   {
-   alive = false;
-   gameOver();
-   }
-   }
-   */
-
 
   void pGameOver()
   {
@@ -307,16 +334,35 @@ class Player extends GameObject
 
   void lifeDisplayP1()
   {
-    int x = 20;
-    int y = 70;
+    if (playerIndex == 0)
+    {
 
-    for (int i=0; i<lives; i++) {
+      int x = 20;
+      int y = 70;
 
-      line(x, y, x + 15, y - 25);
-      line(x + 30, y, x + 15, y - 25);
-      line(x + 5, y - 7, x + 25, y - 7);
+      for (int i=0; i<lives; i++) {
 
-      x+=50;
+        line(x, y, x + 15, y - 25);
+        line(x + 30, y, x + 15, y - 25);
+        line(x + 5, y - 7, x + 25, y - 7);
+
+        x+=50;
+      }
+    }
+    if (playerIndex == 1)
+    {
+
+      int x = 650;
+      int y = 70;
+
+      for (int i=0; i<lives; i++) {
+
+        line(x, y, x + 15, y - 25);
+        line(x + 30, y, x + 15, y - 25);
+        line(x + 5, y - 7, x + 25, y - 7);
+
+        x+=50;
+      }
     }
   }
 }

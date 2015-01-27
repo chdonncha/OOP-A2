@@ -1,6 +1,6 @@
 class Level extends GameObject
 {
-  int level = 0;
+
 
   void display()
   {
@@ -27,7 +27,7 @@ class Level extends GameObject
       if (!containsAsteroids)
       {
 
-      //  level = level + 1;
+        level = level + 1;
        // asteroidAmount = level;
         containsAsteroids = true;
         asteroidAmount = asteroidAmount + 1;

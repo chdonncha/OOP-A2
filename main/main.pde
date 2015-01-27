@@ -21,9 +21,13 @@ int selected = 0;
 int selected2PLAYER = 0;
 int gamemode;
 int size;
-int level;
+int level = 1;
 int asteroidAmount = 1;
 int scoreCounter;
+
+void keyReleased(){
+  menu.keyReleased();
+}
 
 void setup()
 {
