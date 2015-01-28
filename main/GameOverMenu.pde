@@ -19,6 +19,8 @@ class GameOverMenu extends GameObject
 
       case ' ':
         isMainMenu = !isMainMenu;
+        asteroidMode = false;
+        versusMode = false;
         objects.clear();
         objects.add(new Menu(audio));
         level = 1;

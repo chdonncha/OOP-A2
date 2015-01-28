@@ -5,12 +5,13 @@ class Bullet extends GameObject
   float timeDelta = 1.0f / 60.0f;
 
 
-  Bullet()
+  Bullet(float theta)
   {
     position.x = width / 2;  
     position.y = height / 2;
     w = 2;
     h = 2;
+    velocity = new PVector(sin(theta) * 10, -cos(theta) * 10);
   }
 
   void move()
@@ -20,11 +21,13 @@ class Bullet extends GameObject
     {
       alive = false;
     }
-    float lx = sin(theta);
-    float ly = -cos(theta);
-    float speed = 10.0f;
-    position.x += lx * speed;
-    position.y += ly * speed;
+  //  float lx = sin(theta);
+  // float ly = -cos(theta);
+  //  float speed = 10.0f;
+    position.x += velocity.x;
+    position.y += velocity.y;
+
+print(velocity);
 
     if (position.x < 0)
     {
@@ -55,7 +58,6 @@ class Bullet extends GameObject
   }
 
   public void collide(GameObject other) {
-    super.collide(other);
     if (other instanceof Asteroids) {
 
       alive = false;

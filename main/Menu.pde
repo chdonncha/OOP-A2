@@ -51,13 +51,7 @@ class Menu extends GameObject
         stroke(255, 255, 0);
       }
 
-      spellHIGHSCORE();
-
-      stroke(255, 255, 255);
-      if (selected >= 3) {
-        stroke(255, 255, 0);
-      }
-
+      //spellHIGHSCORE();
       spellINSTRUCTIONS();
 
       float x = 50;
@@ -89,117 +83,130 @@ class Menu extends GameObject
   void move()
   {    
     limiter();
-   // menu2PLayer();
+    // menu2PLayer();
     //print(selected);
   }
 
   void keyReleased()
+  {   
+    menu2PLayerKeys();
+  }
+
+  void keyPressed()
   {
-    println("called");
+    mainMenuKeys();
+  }
+
+  void mainMenuKeys()
+  {
+
+    switch (key)
+    {
+
+    case 'w':
+      if (isMainMenu)
+      {
+        selected --;
+      }
+
+      audio.menuSelect1();
+      break;  
+    case 's':
+      if (isMainMenu)
+      {
+        selected ++;
+      }
+
+      audio.menuSelect1();
+      break;  
+
+    case ' ':
+      print("hi");
+      gamemode = selected;
+      if (isMainMenu)
+      {
+        switch(selected) {
+        case 0:
+          isMainMenu = false; 
+          asteroidMode = true;
+          objects.clear();
+          // objects.add(highScore = new HighScore());
+          levelStart();
+          objects.add(score = new Score());
+          objects.add(new PowerupWarp(random(0, width), random(0, height), 30, 30));
+
+          break;
+        case 1:
+          isMainMenu = false;
+          is2PLAYERMenu = true; 
+          break;
+
+        case 2:
+          objects.clear();
+          objects.add(instructions = new Instructions());    
+          isMainMenu = false;
+          break;
+        }
+      }
+      // break;
+    }
+  }
+
+  void menu2PLayerKeys()
+  {
+    if (is2PLAYERMenu)
+    {
 
       switch (key)
       {
 
       case 'w':
-        if (isMainMenu)
-        {
-          selected --;
-        }
+
+        selected2PLAYER --;
 
         audio.menuSelect1();
         break;  
       case 's':
-        if (isMainMenu)
-        {
-          selected ++;
-        }
+
+        selected2PLAYER ++;
 
         audio.menuSelect1();
         break;  
 
       case ' ':
-        print("hi");
-        gamemode = selected;
-        if (isMainMenu)
-        {
-          switch(selected) {
-          case 0:
-            isMainMenu = false; 
-            objects.clear();
-            // objects.add(highScore = new HighScore());
-            levelStart();
-            objects.add(score = new Score());
-            break;
-          case 1:
-            isMainMenu = false;
-            is2PLAYERMenu = true; 
-            break;
 
-          case 2:
-            // high score list
-            break;
+        switch(selected2PLAYER) {
+        case 0:
+          objects.clear();  
+          is2PLAYERMenu = false;
+          levelStart();
+          objects.add(new Player(audio, 600, 300, 1)); 
+          objects.add(score = new Score());
+          objects.add(new PowerupWarp(random(0, width), random(0, height), 30, 30));
 
-          case 3:
-            objects.clear();
-            objects.add(new Instructions());    
-            isMainMenu = false;
-            break;
-          }
-        }
-        // break;
-      }
-    
-  }
-/*
-  void menu2PLayer()
-  {
-    if (keyPressed)
-    {
-      switch (key)
-      {
-
-      case 'w':
-
-        if (is2PLAYERMenu)
-        {
-          selected2PLAYER --;
-        }
-        audio.menuSelect1();
-        break;  
-      case 's':
-
-        if (is2PLAYERMenu)
-        {
-          selected2PLAYER ++;
-        }
-        audio.menuSelect1();
-        break;  
-
-      case 'h':
-
-        if (is2PLAYERMenu)
-        {
-          switch(selected2PLAYER) {
-          case 0:
-            objects.clear();  
-            levelStart();
-            objects.add(new Player(audio, 600, 300, 1)); 
-            objects.add(score = new Score());
-            break;
-          case 1:
-            isMainMenu = false;
-            is2PLAYERMenu = true; 
-            objects.clear();
-            // menu2PLAYER();
-            objects.add(new Player(audio, 100, 300, 0)); 
-            objects.add(new Player(audio, 600, 300, 1)); 
-            break;
-          }
+          break;
+        case 1:
+          isMainMenu = false;
+          is2PLAYERMenu = false; 
+          versusMode = true;
+          objects.clear();
+          // menu2PLAYER();
+          objects.add(new Player(audio, 100, 300, 0)); 
+          objects.add(new Player(audio, 600, 300, 1)); 
+          objects.add(new BigStar());
+          objects.add(new PowerupWarp(random(0, width), random(0, height), 30, 30));
+          objects.add(new PowerupBullet(random(0, width), random(0, height), 30, 30));
+          objects.add(new GravityWell());
+          break;
+        case 2:
+          isMainMenu = true;
+          is2PLAYERMenu = false;
+          break;
         }
       }
     }
   }
-*/
+
   void limiter()
   {
     if (selected == 4) {
@@ -246,7 +253,6 @@ class Menu extends GameObject
   {
     text("Click to reset", width/2, height*.95);
   }
-
 
   void spellSUPER()
   {

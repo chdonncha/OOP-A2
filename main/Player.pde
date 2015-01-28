@@ -9,7 +9,8 @@ class Player extends GameObject
   float toPassB = 0.2f;
   color colourP1;
   color colourP2;
-
+  int bulletAmount = 10;
+  int warpAmount = 3;
   Audio audio;
   Boolean timerT = false;
   Boolean endGame = false;
@@ -17,6 +18,11 @@ class Player extends GameObject
   int max_bullets = 3;
   public int lives = 3;
   int playerIndex = 0;
+
+  int player1Key;
+  int player2Key;
+
+  char up, down, left, right, button1;
 
   Player( float x, float y, float w, float h, int playerIndex)
   {
@@ -26,6 +32,7 @@ class Player extends GameObject
     this.w = w;
     this.h = h;
     theta = 0;
+    SetupKeys();
   }
 
   Player(Audio audio, float x, float y, int playerIndex)
@@ -38,6 +45,7 @@ class Player extends GameObject
     w = 20;
     colour = color(255);
     theta = 0;
+    SetupKeys();
   }
 
   Player()
@@ -48,15 +56,39 @@ class Player extends GameObject
     h = 20;
     colour = color(255);
     theta = 0;
+    SetupKeys();
+  }
+
+  void SetupKeys() {
+    switch(playerIndex)
+    {
+    case 0:
+      up =  'w';
+      down = 's';
+      left  = 'd';
+      right = 'a';
+      button1 = ' ';
+      break;
+      case 1:
+      up = 38;
+      left = 39;
+      right = 37;
+      down = 40;
+      button1 = 17;
+      break;
+    }
   }
 
   void display()
   {
 
     getBounds();
-    lifeDisplayP1();
+    lifeDisplay();
     drawPlayer();
-    println(timer);
+    //checkPlayers();
+    ui();
+
+    //println(timer);
     /*(timer >= 10000)
      {
      textSize(20);
@@ -68,7 +100,6 @@ class Player extends GameObject
   {    
 
     accel.set(0, 0, 0); // cuase drag to slow ship down
-
     screenLoop();
 
     ellapsed += timeDelta;
@@ -122,59 +153,82 @@ class Player extends GameObject
     //rect(position.x, position.y, 50, 50);
   }
 
+
   void keys()
   {    
     if (keyPressed)
     {
-      switch (evalKey())
-      {
-      case 0:
 
+      if (checkKey(down))
+      {
+        if (playerIndex == 0) {
+          if (warpAmount >0)
+          {
+            warp();
+            warpAmount = warpAmount -1;
+          }
+        }
+        if (playerIndex == 1) {
+          if (warpAmount >0)
+          {
+            warp();
+            warpAmount = warpAmount -1;
+          }
+        }
+      }
+      if (checkKey(up)) {
         float totalAccel = 0.1;             // how much ship accelerates
         accel.x = totalAccel * sin(theta);  // total accel
         accel.y = -totalAccel * cos(theta); // total accel
 
         pushMatrix();
-
         translate(position.x, position.y);   
-
         rotate(theta);
-
         line(5, 10, 5, 15);
         line(-5, 10, -5, 15);
         line(0, 10, 0, 20);
-
         popMatrix();
+      }
 
-        break;
-      case 1:
+      if (checkKey('f')) {
         // position.y = position.y + 1;
         objects.clear();
         isMainMenu = true;
         is2PLAYERMenu = false;
         objects.add(menu = new Menu(audio));
-        break;
-      case 2:
+        //warp();
+      }
+      if (checkKey(right))
         theta -= 0.1f;
-        break;
-      case 3:
+
+      if (checkKey(left))
         theta += 0.1f;
-        break;  
-      case 4:
+
+      if (checkKey(button1)) {
         if (ellapsed > toPassB) {
-          //print(size);
-          // if (size > max_bullets)
-          // {
-          Bullet bullet = new Bullet();
-          size +=1;
-          bullet.position = position.get();
-          bullet.theta = theta;
-          audio.Laser1();
-          objects.add(bullet);
-          ellapsed = 0.0f;
+
+          if (asteroidMode)
+          {
+            Bullet bullet = new Bullet(theta);
+            bullet.position = position.get();
+            bullet.theta = theta;
+            audio.Laser1();
+            objects.add(bullet);
+            ellapsed = 0.0f;
+          }
+          if (versusMode)
+          {
+            if (bulletAmount >= 1)
+            {
+              Bullet bullet = new Bullet(theta);
+              bulletAmount = bulletAmount - 1;
+              bullet.position = position.get();
+              audio.Laser1();
+              objects.add(bullet);
+              ellapsed = 0.0f;
+            }
+          }
         }
-        break;
-        //  }
       }
     }
   }
@@ -205,7 +259,7 @@ class Player extends GameObject
     //print(keyCode + "\n");
 
     if (playerIndex == 0) {
-      switch(key) {
+      switch(player1Key) {
       case 'w':
         contIndex = 0;
         break;
@@ -223,13 +277,13 @@ class Player extends GameObject
         break;
       }
     } else if (playerIndex == 1) {
-      switch(keyCode) {
+      switch(player2Key) {
       case 38:
         contIndex = 0;
         break;
-      case 40:
-        contIndex = 1;
-        break;
+        // case 40:
+        //   contIndex = 1;
+        //  break;
       case 37:
         contIndex = 2;
         break;
@@ -245,20 +299,36 @@ class Player extends GameObject
   }
 
   public void collide(GameObject other) {
+
     if (!(other instanceof Bullet)) //if player does not hit a bullet
     {
       if (!(other instanceof Player)) // if player does not hit a player
       {
-        super.collide(other);
-        lives = lives -1;
-        frameCount = 0;
-        playerHit();
-        audio.Hit1();
-        //   explosion();
-        // Do stuff when player hit
+        if (!(other instanceof PowerupWarp)) // if player does not hit a player
+        {
+          if (!(other instanceof PowerupBullet)) // if player does not hit a player
+          {
+            super.collide(other);
+            lives = lives -1;
+            frameCount = 0;
+            playerHit();
+            audio.Hit1();
+            //   explosion();
+            // Do stuff when player hit
+          }
+        }
       }
     }
 
+    if (other instanceof PowerupWarp)
+    {
+      warpAmount = warpAmount + 1;
+    }
+
+    if (other instanceof PowerupBullet) // if player does not hit a player
+    {
+      bulletAmount = bulletAmount + 3;
+    }
 
     if (other instanceof Player) //if two players collide, rebound
     {
@@ -275,8 +345,6 @@ class Player extends GameObject
     if (lives <=0)
     {
       alive = false;
-      objects.clear();
-      objects.add(new GameOverMenu());
     }
     /*
       for (int i = 0; i < objects.size (); i++)
@@ -298,6 +366,29 @@ class Player extends GameObject
      
      }
      */
+  }
+
+  void ui()
+  {
+    textSize(15);
+    stroke(255, 255, 0);
+    fill(255, 255, 0);
+    if (playerIndex == 0)
+    {
+      text("Warps: " + warpAmount, 50, 30);
+      if (versusMode)
+      {
+        text("Bullets: " + bulletAmount, 150, 30);
+      }
+    }
+    if (playerIndex == 1)
+    {
+      text("Warps: " + warpAmount, 750, 30);
+      if (versusMode)
+      {
+        text("Bullets: " + bulletAmount, 550, 30);
+      }
+    }
   }
 
   void pGameOver()
@@ -332,7 +423,7 @@ class Player extends GameObject
     }
   }
 
-  void lifeDisplayP1()
+  void lifeDisplay()
   {
     if (playerIndex == 0)
     {
@@ -364,6 +455,34 @@ class Player extends GameObject
         x+=50;
       }
     }
+  }
+
+  void checkPlayers()
+  {
+    /*
+    boolean containsPlayers = false;
+     
+     for (int i = 0; i < objects.size (); i++)
+     {
+     if (objects.get(i) instanceof Player)
+     {
+     containsPlayers = true;
+     break;
+     }
+     }
+     
+     if (!containsPlayers)
+     {
+     objects.clear();
+     objects.add(new GameOverMenu());
+     }
+     */
+  }
+
+  void warp()
+  {
+    position.x = random(0, width);
+    position.y = random(0, height);
   }
 }
 

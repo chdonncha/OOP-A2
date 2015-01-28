@@ -9,14 +9,19 @@ Menu menu;
 HighScore highScore;
 Score score;
 Asteroids asteroid;
+Instructions instructions;
 Minim minim;
 AudioPlayer sou;
 Audio audio;
 Stars[] Stars = new Stars[80];
+boolean[] keys = new boolean[526];
+
 
 
 boolean isMainMenu = true;
 boolean is2PLAYERMenu = false;
+boolean asteroidMode = false;
+boolean versusMode = false;
 int selected = 0;
 int selected2PLAYER = 0;
 int gamemode;
@@ -24,10 +29,6 @@ int size;
 int level = 1;
 int asteroidAmount = 1;
 int scoreCounter;
-
-void keyReleased(){
-  menu.keyReleased();
-}
 
 void setup()
 {
@@ -42,6 +43,27 @@ void setup()
   }
 }
 
+void keyReleased() {
+  if (is2PLAYERMenu)
+    menu.keyReleased();
+  
+    keys[keyCode] = false;
+  
+  //instructions.keyReleased();
+}
+
+void keyPressed()
+{
+   if (isMainMenu)
+      menu.keyPressed();
+  
+    keys[keyCode] = true;
+}
+
+boolean checkKey(char theKey)
+{
+  return keys[Character.toUpperCase(theKey)];
+}
 void draw()
 {
 

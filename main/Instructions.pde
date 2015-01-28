@@ -10,10 +10,9 @@ class Instructions extends GameObject
     rect(100, 50, 600, 450);
 
     insText();
-
+    keyReleased();
     spellBACK();
     asteroid();
-    keyReleased();
     drawPlayer();
   }
 
@@ -28,46 +27,22 @@ class Instructions extends GameObject
     text("player 1 rotate right w, roate left d, forward w, space bar to fire laser", width / 2, height / 2);
     text ("player 2 roate right right arrow, roate left left arrow, forward up arrow, right ctrl to fire laser", width / 2, height / 2);
     text("player lives are represented by: ", width / 2, height / 2);
-  }
-
-  void spellBACK()
-  {    
-    stroke(255, 255, 0);
-    // character B
-    line(width / 2 - 65, 400, width / 2 - 65, 430);
-    line(width / 2 - 65, 400, width / 2 - 50, 400);
-    line(width / 2 - 65, 430, width / 2 - 50, 430);
-    line(width / 2 - 65, 415, width / 2 - 50, 415);
-    line(width / 2 - 50, 400, width / 2 - 45, 407.5);
-    line(width / 2 - 50, 415, width / 2 - 45, 407.5);
-    line(width / 2 - 50, 430, width / 2 - 45, 422.5);
-    line(width / 2 - 50, 415, width / 2 - 45, 422.5);
-
-    // character A
-    line(width / 2 - 35, 430, width / 2 - 35, 410);
-    line(width / 2 - 15, 430, width / 2 - 15, 410);
-    line(width / 2 - 35, 410, width / 2 - 25, 400);
-    line(width / 2 - 15, 410, width / 2 - 25, 400);
-    line(width / 2 - 35, 415, width / 2 - 15, 415);
-
-    // character C
-    line(width / 2 - 5, 430, width / 2 - 5, 400);
-    line(width / 2 + 15, 400, width / 2 - 5, 400);
-    line(width / 2 + 15, 430, width / 2 - 5, 430);
-
-    // character K
-    line(width / 2 + 25, 430, width / 2 + 25, 400);
-    line(width / 2 + 25, 415, width / 2 + 45, 400);
-    line(width / 2 + 25, 415, width / 2 + 45, 430);
-  }
+  } 
 
   void keyReleased()
   {
-    if (key == 'f')
+    if (key == ' ')
     {
+      int count;
+      count = 0;
+      count = count + 1;
+      
+      if(count == 2)
+      {
       objects.clear();
       isMainMenu = true;
       objects.add(new Menu(audio));
+      }
     }
   }
 
@@ -120,6 +95,37 @@ class Instructions extends GameObject
     }
 
     popMatrix();
+  }
+
+  void spellBACK()
+  {    
+    stroke(255, 255, 0);
+    // character B
+    line(width / 2 - 65, 400, width / 2 - 65, 430);
+    line(width / 2 - 65, 400, width / 2 - 50, 400);
+    line(width / 2 - 65, 430, width / 2 - 50, 430);
+    line(width / 2 - 65, 415, width / 2 - 50, 415);
+    line(width / 2 - 50, 400, width / 2 - 45, 407.5);
+    line(width / 2 - 50, 415, width / 2 - 45, 407.5);
+    line(width / 2 - 50, 430, width / 2 - 45, 422.5);
+    line(width / 2 - 50, 415, width / 2 - 45, 422.5);
+
+    // character A
+    line(width / 2 - 35, 430, width / 2 - 35, 410);
+    line(width / 2 - 15, 430, width / 2 - 15, 410);
+    line(width / 2 - 35, 410, width / 2 - 25, 400);
+    line(width / 2 - 15, 410, width / 2 - 25, 400);
+    line(width / 2 - 35, 415, width / 2 - 15, 415);
+
+    // character C
+    line(width / 2 - 5, 430, width / 2 - 5, 400);
+    line(width / 2 + 15, 400, width / 2 - 5, 400);
+    line(width / 2 + 15, 430, width / 2 - 5, 430);
+
+    // character K
+    line(width / 2 + 25, 430, width / 2 + 25, 400);
+    line(width / 2 + 25, 415, width / 2 + 45, 400);
+    line(width / 2 + 25, 415, width / 2 + 45, 430);
   }
 }
 
