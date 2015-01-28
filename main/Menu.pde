@@ -145,6 +145,7 @@ class Menu extends GameObject
           objects.clear();
           objects.add(instructions = new Instructions());    
           isMainMenu = false;
+          isInstrMenu = true;
           break;
         }
       }
@@ -174,13 +175,13 @@ class Menu extends GameObject
         break;  
 
       case ' ':
-
         switch(selected2PLAYER) {
         case 0:
+          asteroidMode = true;
           objects.clear();  
           is2PLAYERMenu = false;
           levelStart();
-          objects.add(new Player(audio, 600, 300, 1)); 
+          objects.add(player = new Player(audio, 600, 300, 1)); 
           objects.add(score = new Score());
           objects.add(new PowerupWarp(random(0, width), random(0, height), 30, 30));
 
@@ -188,15 +189,17 @@ class Menu extends GameObject
         case 1:
           isMainMenu = false;
           is2PLAYERMenu = false; 
-          versusMode = true;
           objects.clear();
           // menu2PLAYER();
           objects.add(new Player(audio, 100, 300, 0)); 
           objects.add(new Player(audio, 600, 300, 1)); 
-          objects.add(new BigStar());
+          objects.add(new BlackHole());
           objects.add(new PowerupWarp(random(0, width), random(0, height), 30, 30));
           objects.add(new PowerupBullet(random(0, width), random(0, height), 30, 30));
           objects.add(new GravityWell());
+          versusMode = true;
+          versus1PLives = true;
+          versus2PLives = true;
           break;
         case 2:
           isMainMenu = true;
@@ -238,7 +241,7 @@ class Menu extends GameObject
     ready = true;
     if (ready) {
 
-      objects.add(new Player(audio, 350, 300, 0)); 
+      objects.add(player = new Player(audio, 350, 300, 0)); 
       objects.add(new Level()); 
       // objects.add(new BigStar());
 
@@ -249,10 +252,6 @@ class Menu extends GameObject
     }
   }
 
-  void gameOver()
-  {
-    text("Click to reset", width/2, height*.95);
-  }
 
   void spellSUPER()
   {

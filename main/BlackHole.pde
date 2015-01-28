@@ -1,9 +1,9 @@
-class BigStar extends GameObject
+class BlackHole extends GameObject
 {
   float radius;
   float points;
 
-  BigStar(float x, float y, float radius, float points)
+  BlackHole(float x, float y, float radius, float points)
   {
     position.x = x;
     position.y = y;
@@ -14,7 +14,7 @@ class BigStar extends GameObject
     h = radius * 2;
   }
 
-  BigStar()
+  BlackHole()
   {
     this(width / 2, height / 2, 30, 40);
   }

@@ -1,12 +1,12 @@
 import java.awt.Rectangle;
-import java.awt.Polygon;
 import ddf.minim.*;
 
 ArrayList<GameObject> objects = new ArrayList<GameObject>(); 
 
-BigStar stars;
+BlackHole blackhole;
 Menu menu;
 HighScore highScore;
+Player player;
 Score score;
 Asteroids asteroid;
 Instructions instructions;
@@ -16,12 +16,14 @@ Audio audio;
 Stars[] Stars = new Stars[80];
 boolean[] keys = new boolean[526];
 
-
-
 boolean isMainMenu = true;
 boolean is2PLAYERMenu = false;
+boolean isInstrMenu = false;
 boolean asteroidMode = false;
 boolean versusMode = false;
+
+boolean versus1PLives = false;
+boolean versus2PLives = false;
 int selected = 0;
 int selected2PLAYER = 0;
 int gamemode;
@@ -32,7 +34,6 @@ int scoreCounter;
 
 void setup()
 {
-
   size(800, 600);
   audio = new Audio(new Minim(this));
   // noLoop();
@@ -46,18 +47,27 @@ void setup()
 void keyReleased() {
   if (is2PLAYERMenu)
     menu.keyReleased();
-  
-    keys[keyCode] = false;
-  
+
+  if (isInstrMenu)
+    instructions.keyReleased();
+
+  keys[keyCode] = false;
+
   //instructions.keyReleased();
 }
 
 void keyPressed()
 {
-   if (isMainMenu)
-      menu.keyPressed();
-  
-    keys[keyCode] = true;
+  if (isMainMenu)
+    menu.keyPressed();
+
+  if (asteroidMode)
+    player.keyPressed();
+
+ // if (versusMode)
+  //  player.keyPressed();
+
+  keys[keyCode] = true;
 }
 
 boolean checkKey(char theKey)
@@ -95,6 +105,4 @@ void draw()
     }
   }
 }
-
-
 
