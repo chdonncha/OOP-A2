@@ -122,7 +122,6 @@ class Menu extends GameObject
 
     case ' ':
       print("hi");
-      gamemode = selected;
       if (isMainMenu)
       {
         switch(selected) {
@@ -189,6 +188,7 @@ class Menu extends GameObject
         case 1:
           isMainMenu = false;
           is2PLAYERMenu = false; 
+          versusMode = true;
           objects.clear();
           // menu2PLAYER();
           objects.add(new Player(audio, 100, 300, 0)); 
@@ -196,8 +196,7 @@ class Menu extends GameObject
           objects.add(new BlackHole());
           objects.add(new PowerupWarp(random(0, width), random(0, height), 30, 30));
           objects.add(new PowerupBullet(random(0, width), random(0, height), 30, 30));
-          objects.add(new GravityWell());
-          versusMode = true;
+          objects.add(new GravityWell()); 
           versus1PLives = true;
           versus2PLives = true;
           break;

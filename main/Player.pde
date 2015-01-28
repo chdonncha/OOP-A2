@@ -10,12 +10,12 @@ class Player extends GameObject
   color colourP1;
   color colourP2;
   int bulletAmount = 10;
-  int warpAmount = 3;
+  int warpAmount = 6;
   int lives = 3;
   Audio audio;
   Boolean timerT = false;
   Boolean endGame = false;
-  Boolean checkWarp = false;
+  Boolean checkWarp = true;
 
   int max_bullets = 3;
 
@@ -83,7 +83,7 @@ class Player extends GameObject
 
   void keyPressed()
   {
-
+/*
     if (playerIndex == 0)
     {
       if (key == 's')
@@ -98,7 +98,7 @@ class Player extends GameObject
       {
         checkWarp = true;
       }
-    }
+    }*/
   }
 
   void SetupKeys() {
@@ -152,6 +152,7 @@ class Player extends GameObject
 
     keys();
   }
+
 
   void drawPlayer()
   {
@@ -216,31 +217,33 @@ class Player extends GameObject
       {
         if (playerIndex == 0) 
         {
-          if (checkWarp)
-          {
+       //   if (checkWarp)
+        //  {
             if (warpAmount >0)
             {  
               warp();
               warpAmount = warpAmount -1;
               checkWarp = false;
               audio.Warp1();
-            }
+        //    }
           }
         }
         if (playerIndex == 1) 
         {
-          if (checkWarp)
-          {
+        //  if (checkWarp)
+       //  {
             if (warpAmount >0)
             {
               warp();
               warpAmount = warpAmount -1;
               checkWarp = false;
               audio.Warp1();
-            }
+          //  }
           }
         }
       }
+
+    
 
       if (checkKey(up)) {
         float totalAccel = 0.1;             // how much ship accelerates
@@ -435,36 +438,38 @@ class Player extends GameObject
 
   void playerHit()
   {
-
-    if (lives <=0)
+    if (versusMode)
     {
-      alive = false;
-      objects.clear();
-      objects.add(new GameOverMenu());
+      if (playerIndex == 0)
+      {
+        if (lives <= 0)
+        {
+          objects.clear();
+          boolean player1Wins = true;
+          objects.add(new GameOverMenu());
+        }
+      }
+      if (playerIndex == 1)
+      {
+        if (lives <= 0)
+        {
+          objects.clear();
+          boolean player2Wins = true;
+          objects.add(new GameOverMenu());
+        }
+      }
+    }
+
+    if (asteroidMode)
+    {
+      if (lives <=0)
+      {
+        alive = false;
+        objects.clear();
+        objects.add(new GameOverMenu());
+      }
     }
   }
-
-  /*
-      for (int i = 0; i < objects.size (); i++)
-   {
-   if (objects.get(i) instanceof Player)
-   {
-   endGame = true;
-   break;
-   }
-   }
-   
-   if(endGame)
-   {
-   objects.clear();
-   //  isMainMenu = !isMainMenu;
-   //  objects.add(new Menu(audio));
-   asteroidAmount = 0;
-   //  is2PLAYERMenu = !is2PLAYERMenu;
-   
-   }
-   */
-
 
   void ui()
   {
@@ -484,7 +489,7 @@ class Player extends GameObject
       text("Warps: " + warpAmount, 750, 30);
       if (versusMode)
       {
-        text("Bullets: " + bulletAmount, 550, 30);
+        text("Bullets: " + bulletAmount, 659, 30);
       }
     }
   }

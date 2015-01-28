@@ -24,17 +24,33 @@ boolean versusMode = false;
 
 boolean versus1PLives = false;
 boolean versus2PLives = false;
+
+boolean player1Wins = false;
+boolean player2Wins = false;
+
 int selected = 0;
 int selected2PLAYER = 0;
-int gamemode;
-int size;
 int level = 1;
 int asteroidAmount = 1;
 int scoreCounter;
 
+boolean devMode = false;
+
+boolean sketchFullScreen() {
+  return ! devMode;
+}
+
 void setup()
 {
-  size(800, 600);
+   if (devMode)
+  {
+    size(800, 600);
+  }
+  else
+  {
+    size(displayWidth, displayHeight);
+  }
+
   audio = new Audio(new Minim(this));
   // noLoop();
   objects.add(menu = new Menu(audio));
@@ -65,7 +81,7 @@ void keyPressed()
     player.keyPressed();
 
  // if (versusMode)
-  //  player.keyPressed();
+   // player.keyPressed();
 
   keys[keyCode] = true;
 }
@@ -93,7 +109,6 @@ void draw()
     if (! objects.get(i).alive)
     {
       objects.remove(i);
-      size -=1;
     }
   }
 
