@@ -486,10 +486,10 @@ class Player extends GameObject
     }
     if (playerIndex == 1)
     {
-      text("Warps: " + warpAmount, 750, 30);
+      text("Warps: " + warpAmount, width - 50, 30);
       if (versusMode)
       {
-        text("Bullets: " + bulletAmount, 659, 30);
+        text("Bullets: " + bulletAmount, width - 150, 30);
       }
     }
   }
@@ -554,7 +554,7 @@ class Player extends GameObject
     if (playerIndex == 1)
     {
 
-      int x = 550;
+      int x = width - 50;
       int y = 70;
 
       for (int i=0; i<lives; i++) {
@@ -563,7 +563,7 @@ class Player extends GameObject
         line(x + 30, y, x + 15, y - 25);
         line(x + 5, y - 7, x + 25, y - 7);
 
-        x+=50;
+        x-=50;
       }
     }
   }

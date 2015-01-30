@@ -13,5 +13,10 @@ class Score extends GameObject
   {
     
   }
+  
+  void spellSCORE()
+  { 
+    
+  }
 }
 
