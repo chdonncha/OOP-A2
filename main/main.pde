@@ -1,6 +1,10 @@
+// Note: press 'f' as an admin command to exit any gameMode and return to the main menu
+// Hold space bar to select gameMode in the main menu
+
 import java.awt.Rectangle;
 import ddf.minim.*;
 
+// Main ArrayList
 ArrayList<GameObject> objects = new ArrayList<GameObject>(); 
 
 BlackHole blackhole;
@@ -36,6 +40,7 @@ int scoreCounter;
 
 boolean devMode = false;
 
+// enable FullScreen Mode
 boolean sketchFullScreen() {
   return ! devMode;
 }
@@ -90,6 +95,7 @@ boolean checkKey(char theKey)
 {
   return keys[Character.toUpperCase(theKey)];
 }
+
 void draw()
 {
 

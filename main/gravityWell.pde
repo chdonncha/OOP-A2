@@ -19,8 +19,10 @@ class GravityWell extends GameObject {
       if (!(other instanceof PowerupBullet))
       {
         if (other instanceof Bullet)
+        // the gavity for the bullet, due to higher velocity of the bullet
           gravityPower = 0.35f;
         else
+        // the gravity for everything else
           gravityPower = 0.03f;
 
         PVector pullDir = new PVector(position.x - other.position.x, position.y - other.position.y);

@@ -7,16 +7,6 @@ class Audio
     this.minim = minim;
   }
 
-  /* void audioMusic(){   
-   
-   sou = minim.loadFile("music.mp3");
-   sou.loop();
-   }*/
-
-  //  void update() {
-  //    audioMusic();
-  //  }
-
   void Hit1() 
   {
     sou = minim.loadFile("Hit1.wav");
